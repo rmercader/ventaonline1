@@ -1,0 +1,147 @@
+{literal}
+<style>
+	#container { 
+		width: 920px; 
+	}
+	.image { 
+		width:230px;
+		height:145px;
+		float: left;
+		position:relative; 
+		margin-top: 10px;
+		cursor: pointer;
+	}
+	a.delete { 
+		display:none;
+		position:absolute;
+		top: 96px;
+		left:185px;
+		width:32px;
+		height:32px;
+		text-indent:-999px;
+		background-image:url(templates/img/ico-eliminar-foto.png);
+	}
+	.image:hover a.delete { 
+		display:block; 
+	}
+	DIV.list_item_container {
+		height: 20px;
+		padding: 5px;
+	}
+	DIV.img-thu {
+		width: {/literal}{$LARGO_THU_COLOR}{literal}px;
+		height: {/literal}{$ANCHO_THU_COLOR}{literal}px;
+		float: left;
+	}
+	DIV.label {
+		padding-left: 5px;
+		text-transform: uppercase;
+		padding-left: 35px;
+	}
+</style>
+<script>
+	
+	function prepararBorrados(){
+		$('a.delete').on('click', function(e){
+			e.preventDefault();
+			imageID = $(this).closest('.image')[0].id;
+			if(confirm("¿Está seguro de eliminar el color seleccionado?")){
+				document.getElementById("container").innerHTML = "<img src=\"templates/img/spinner.gif\" />";
+				xajax_eliminarAsociacionColor(document.getElementById("id_prenda").value, imageID);
+			}
+		});	
+	}
+	
+	$(function() {
+		$( "#nombre" ).autocomplete({
+			source: 'prendas/colores-prenda-ajax.php',
+			autoFocus: true,
+			delay: 500,
+			minLength: 3,
+			select: function(event, ui){
+				var valorPuesto = ui.item.value.split(' - ');
+				document.getElementById("id_color").value = valorPuesto[0];
+			},
+			focus: function(event, ui){
+				//event.cancelBubble = true;
+			}
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			var inner_html = '<a><div class="list_item_container"><div class="img-thu"><img src="' + item.image + '"></div><div class="label">' + item.label + '</div></div></a>';
+			return $( "<li></li>" ).data( "item.autocomplete", item ).append(inner_html).appendTo( ul );
+		};
+	});
+	
+
+	$(document).ready(function(){
+		prepararBorrados();
+		
+		$("#btAsociarColor").click(function(){
+			var errores = "";
+			var idColor = document.getElementById("id_color").value * 1;
+			if(isNaN(idColor) || idColor <= 0){
+				errores += "Por favor ingrese un color para asociar.\n";
+			}
+			
+			if(errores == ""){
+				document.forms["frmColores"].submit();
+			}
+			else{
+				alert(errores);
+			}
+		});
+	});
+</script>
+<script language="javascript" src="templates/src/helper-prendas.js"></script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmColores">	
+	{$NAVEGADOR}
+	<div class="button">
+		<img src="templates/img/ico-btn-editar.gif" alt="Editar detalles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=prendas&COD={$id_prenda}&ACC=M" />
+		<b>Editar detalles</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=fotos-prenda&COD={$id_prenda}" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-talles.gif" alt="Administrar talles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=talles-prenda&COD={$id_prenda}" />
+		<b>Administrar talles</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-stock.png" alt="Administrar stock" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=stock-prenda&COD={$id_prenda}" />
+		<b>Administrar stock</b>
+	</div>
+	<div class="clear" />
+	<br>
+	
+	<div class="celda-campo">
+		<div class="tit-campo">Escribir el nombre del color</div>
+		<input type="text" name="nombre" id="nombre" size="30" style="text-transform: uppercase" />
+		<div id="resultados"></div>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<div class="button" style="position: relative; bottom: 4px;" id="btAsociarColor"><b>Asociar color</b></div>
+	</div>
+	<div class="clear" style="height: 20px;"></div>
+	<div class="clear">
+		<div id="container">
+			{$COLORES}
+			<div class="clear"></div>
+		</div>
+	</div>
+    <input type="hidden" name="orden" id="orden" />
+	<input type="hidden" name="error" value="{$error}" id="error">
+	<input type="hidden" name="id_prenda" id="id_prenda" value="{$id_prenda}">
+	<input type="hidden" name="id_color" id="id_color" value="{$id_color}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("error").value != "")
+		alert(document.getElementById("error").value);
+</script>
+{/literal}

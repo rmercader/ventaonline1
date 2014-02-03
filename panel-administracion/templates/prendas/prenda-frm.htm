@@ -1,0 +1,91 @@
+﻿{literal}
+<script language="javascript" src="templates/src/helper-prendas.js"></script>
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+	
+	if(errores != ""){
+		alert("No es posible ingresar la prenda:\n"+errores);
+	}
+	else{
+		document.forms["frmProducto"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmProducto" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	{if $ACC eq 'M'}
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=fotos-prenda&COD={$id_prenda}" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-colores.gif" alt="Administrar colores" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=colores-prenda&COD={$id_prenda}" />
+		<b>Administrar colores</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-talles.gif" alt="Administrar talles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=talles-prenda&COD={$id_prenda}" />
+		<b>Administrar talles</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-stock.png" alt="Administrar stock" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=stock-prenda&COD={$id_prenda}" />
+		<b>Administrar stock</b>
+	</div>
+	<div class="clear" />
+	{/if}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_prenda" size="30" value="{$nombre_prenda}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Categoría</div>
+		{if $SOLO_LECTURA != ''}
+			<input type="text" name="categoria_prenda_txt" size="30" value="{$categoria_prenda_txt}" readonly="readonly">
+		{else}
+			<select name="id_categoria_prenda" id="id_categoria_prenda">
+				{html_options values=$categoria_prenda_id selected=$id_categoria_prenda output=$categoria_prenda_nom}
+			</select>
+		{/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Precio unitario</div>
+		<input type="text" name="precio" size="10" value="{$precio}" onkeypress="return realNumOnly(event);" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Visible en el sitio<input type="checkbox" name="visible" id="visible" {$visible}><label>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Destacada<input type="checkbox" name="destacada" id="destacada" {$destacada}><label>
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Al salvar, redirigir a edición<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	<div class="clear">
+		<div class="tit-campo">Descripción</div>
+		{$DESCRIPCION}
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Información técnica</div>
+		{$INFOTECNICA}
+	</div>
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_prenda" value="{$id_prenda}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

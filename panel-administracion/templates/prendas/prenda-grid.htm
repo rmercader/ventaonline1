@@ -1,0 +1,42 @@
+﻿<table width="98%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" width="15%" class="nivel01">Identificador</td>
+		<td align="center" class="nivel01">Nombre de la prenda</td>
+		<td align="center" class="nivel01">Categoría</td>
+		<td align="center" class="nivel01">Línea</td>
+        <td align="center" class="nivel01">Destacada</td>
+		<td align="center" class="nivel01">Visible</td>
+		<td align="center" class="nivel01">Precio</td>
+        <!--<td align="center" class="nivel01">Foto</td>-->
+		<td align="center" width="235px" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_prenda}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_categoria_prenda}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_linea}</td>
+        <td align="left" class="nivel02">{$REG[linea].destacada}</td>
+		<td align="left" class="nivel02">{$REG[linea].visible}</td>
+		<td align="right" class="nivel02">{$REG[linea].precio}</td>
+        <!--<td align="center" class="nivel02" width="70px">
+        	<img src="{$DIR_HTTP_FOTOS_PRENDAS}{$REG[linea].id}/{$REG[linea].nombre_imagen}-thu.{$REG[linea].extension}" />
+        </td>-->
+		<td width="235px" class="nivel02" nowrap="nowrap">
+			<a href="admin-catalogo.php?MOD=fotos-prenda&COD={$REG[linea].id}" title="Administrar fotos">
+                <img src="templates/img/ico-lst-fotos.png" alt="Administrar fotos" border="0" hspace="2">
+            </a>
+			<a href="admin-catalogo.php?MOD=colores-prenda&COD={$REG[linea].id}" title="Administrar colores">
+                <img src="templates/img/ico-lst-colores.gif" alt="Administrar colores" border="0" hspace="2">
+            </a>
+			<a href="admin-catalogo.php?MOD=talles-prenda&COD={$REG[linea].id}" title="Administrar talles">
+                <img src="templates/img/ico-lst-talles.gif" alt="Administrar talles" border="0" hspace="2">
+            </a>
+			<a href="admin-catalogo.php?MOD=stock-prenda&COD={$REG[linea].id}" title="Administrar stock">
+                <img src="templates/img/ico-lst-stock.png" alt="Administrar stock" border="0" hspace="2">
+            </a>
+			{include file="base_accion_grid.htm"}
+		</td>
+	</tr>
+	{/section}
+</table>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>^^store_name^^</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="https://^^store_domain^^/themes/standard/styles.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body>
+<div>
+	<font style="font-weight: bold; font-size: 12px;">Para la compra local, el monto es en $U.</font>
+</div>
+<div id="msg-monto-pesos"></div>
+<div id="msg-minimo" style="display: none;"></div>
+<br />
+<a href="javascript:compraLocal();" style="float:right; text-decoration: none; color: #000;" id="compraLocalUp">
+	<img src="http://www.prili.net/imagenes/btn-compralocal.png" border="0" />
+	<img src="http://www.prili.net/imagenes/cart-checkout-or.png" border="0" />
+</a>
+	^^cart^^
+<a href="javascript:compraLocal();" style="float:right; text-decoration: none; color: #000;" id="compraLocalDown">
+	<img src="http://www.prili.net/imagenes/cart-checkout-or.png" border="0" style="padding-right: 10px" />
+	<img src="http://www.prili.net/imagenes/btn-compralocal.png" border="0" />
+</a>
+<script type="text/javascript">
+	
+	document.getElementById("msg-minimo").innerHTML = '<font style="font-weight: bold; color: #D03B39; font-size: 12px;">El monto mínimo de una compra es de $U ' + fc_json.custom_fields["minimop"] + ' (' + fc_json.custom_fields["minimod"] + ' USD). De lo contrario no podrás completar tu compra en los pasos siguientes.</font>';
+	
+	var tdEmpty = document.getElementById("fc_empty_cart");
+	if(tdEmpty != null && tdEmpty.innerHTML != ""){
+		document.getElementById("compraLocalUp").style.display = "none";
+		document.getElementById("compraLocalDown").style.display = "none";
+	}
+
+	$(document).ready(function(){
+		$(".fc_cart_item_quantity").change(function(){
+			$("#compraLocalUp").css("display", "none");
+			$("#compraLocalDown").css("display", "none");
+		});
+		$(".fc_cart_update").click(function(){
+			$("#compraLocalUp").css("display", "block");
+			$("#compraLocalDown").css("display", "block");
+		});
+	});
+	
+</script>
+<script type="text/javascript">
+	
+	function compraLocal(){
+		parent.location = 'http://www.prili.net/checkout-local.php';
+	}
+	
+	var convusd = fc_json.custom_fields["minimod"] / fc_json.custom_fields["minimop"];
+	var total = 0;
+	for(var key in fc_json.products) {
+		var prod = fc_json.products[key];
+		total = total + prod["price"];
+	}
+
+	var totalPesos = Math.round(total / convusd).toFixed(2); 
+	$("#msg-monto-pesos").html('<font style="font-weight: bold; font-size: 12px;">El monto actual de tu compra es de $U ' + totalPesos + '.</font>');
+	
+	if(total < fc_json.custom_fields["minimod"]) {
+		document.getElementById("msg-minimo").style.display = "block";
+	} 
+	else {
+		document.getElementById("msg-minimo").style.display = "none";
+	}
+	
+</script>
+</body>
+</html>

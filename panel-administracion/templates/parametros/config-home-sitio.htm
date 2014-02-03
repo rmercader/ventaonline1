@@ -1,0 +1,23 @@
+<form action="" method="POST" enctype="multipart/form-data" name="frmConfigHome">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Orientación de la página</div>
+		<select id="orientacion_home" name="orientacion_home">
+			{html_options values=$o_values output=$o_dsc selected=$orientacion_home}
+		</select>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Imagen principal</div>
+		<input type="file" name="imagen" id="imagen" size="90">
+	</div>
+	<div class="clear">
+		<img src="{$urlImagen}" alt="imagen" width="1000" height="700" />
+	</div>
+	<input type="hidden" name="error" value="{$error}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmConfigHome"].elements["error"].value != "")
+		alert(document.forms["frmConfigHome"].elements["error"].value);
+</script>
+{/literal}

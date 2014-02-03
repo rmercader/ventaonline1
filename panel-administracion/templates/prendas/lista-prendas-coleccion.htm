@@ -1,0 +1,45 @@
+{if $REG != 0}
+{literal}
+<script type="text/javascript">
+	function marcarTodos(marcar){
+		$("input[type='checkbox']").each(function() {
+			$(this).attr("checked", marcar);
+		});
+	}
+</script>
+{/literal}
+<div class="celda-campo">
+	<a href="javascript: marcarTodos(true);">Marcar todos</a>&nbsp;/&nbsp;<a href="javascript: marcarTodos(false);">Desmarcar todos</a>
+</div>
+<div class="celda-campo">
+	<div class="button" style="position: relative; width: 200px; bottom: 10px" id="btEliminar" onclick="eliminar();">
+		<b>Eliminar seleccionadas</b>
+	</div>
+</div>
+{/if}
+<table width="100%" align="left" cellspacing="0" id="tblPrendas">
+	{if $REG != 0}
+	<thead>
+	<tr>
+		<td align="center" class="nivel01" width="12px">&nbsp;</td>
+		<td align="center" class="nivel01">Nombre</td>
+		<td align="center" class="nivel01">Categoría</td>
+		<td align="center" class="nivel01">Línea</td>
+	</tr>
+	</thead>
+	{/if}
+	{section name=linea loop=$REG}
+	<tr>
+	    <td align="center" class="nivel02" width="12px">
+			<input type="checkbox" id="sel_{$REG[linea].id_prenda}" name="sel_{$REG[linea].id_prenda}" />
+		</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_prenda}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_categoria_prenda}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_linea}</td>
+	</tr>
+	{sectionelse}
+	<tr>
+		<th>No se encontraron prendas asociadas a la colección.</th>
+	</tr>
+	{/section}
+</table>

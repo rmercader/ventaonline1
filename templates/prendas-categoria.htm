@@ -1,0 +1,79 @@
+<!--start holder-->
+<div class="holder_content">
+	<aside class="group1">
+		<h3>Prendas destacadas de la categoría</h3> 
+		{foreach $lstDestacadas as $prendaDest}
+		<form action="https://prili.foxycart.com/cart" method="post">
+			<input type="hidden" name="name" value="{$prendaDest.nombre_prenda}" />
+			<input type="hidden" name="price" value="{$prendaDest.precio}" />
+			<input type="hidden" name="code" value="{$prendaDest.id_prenda}" />
+			<article class="holder_news">
+				<div id="destacada">
+					<a href="#">
+						<img src="{$prendaDest.url_preview}" width="{$LARGO_PREVIEW_PRENDA}" height="{$ANCHO_PREVIEW_PRENDA}" alt="" />
+					</a>
+				</div>
+			<p>{$prendaDest.nombre_prenda}</p>
+			<div id="price">${$prendaDest.precio} </div>
+			<span class="comprar">
+				<input type="submit" value="Comprar" class="btn-comprar" />
+				<!--<a href="#">Comprar</a>-->
+			</span>
+			</article>
+		</form>
+		{/foreach}
+	</aside>
+	<!-- start menu lat izq -->
+	<section class="group2">
+		<article class="holder_gallery">
+			<h3>Línea {$nombre_linea}</h3>
+		</article>
+		<!--
+		<article class="holder_gallery">
+			<h3>¿Como comprar online?</h3>
+			<a href="#"><img src="imagenes/como-comprar-online.png" width="170" height="98" alt="¿como comprar online?"/></a>
+			<p class="prominent">Siga las indicaciones que aqui les ofrecemos para comprar los productos</p>    
+			<span class="readmore"><a href="#">ver más</a></span> 
+		</article>
+		<span class="line"></span>
+		<article class="holder_gallery">
+			<h3>Regale online cupones prili</h3>
+			<a  href="#"><img src="imagenes/regale-online.png" width="213" height="114" alt="regale online cupones prili"/></a>
+			<p class="prominent">Haga un regalo a sus seres queridos vía online simplemente con un clic.</p>
+			<span class="readmore"><a href="#">ver más</a></span>
+		</article>-->
+	</section>
+	<!-- end menu lat izq -->
+</div>
+<!--end holder-->
+<!--
+<div id="lateral-izq">
+	<div id="subcategorias">
+		<ul>
+			<li class="subcategoria" style="text-align: center;">{$nombre_categoria}</li>
+			{foreach $arr_cats as $cat_var}
+			<li class="subcategoria"><a href="{$cat_var.url}" border="0">{$cat_var.nombre}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+<div id="listado-central">
+{foreach $prendas as $itemPrenda}
+	<form action="https://prili.foxycart.com/cart" method="post" class="foxycart" name="frmPrenda{$itemPrenda.id_prenda}">
+		<input type="hidden" name="name" value="{$itemPrenda.nombre_prenda}" />
+		<input type="hidden" name="price" value="{$itemPrenda.precio}" />
+		<input type="hidden" name="code" value="{$itemPrenda.id_prenda}" />
+		<div class="prenda-listado">
+			<img border="0" src="{$itemPrenda.url_preview}" width="{$LARGO_PREVIEW_PRENDA}" height="{$ANCHO_PREVIEW_PRENDA}" />
+			<div class="prenda-listado-dsc">
+				<div class="prenda-listado-nombre">{$itemPrenda.nombre_prenda}</div>
+				<div class="prenda-listado-precio">{$itemPrenda.precio}</div>
+				<div class="prenda-listado-comprar">
+					<input type="submit" value="comprar" class="prenda-listado-btn-submit" />
+				</div>
+			</div>
+		</div>
+		
+	</form>
+{/foreach}
+</div>-->

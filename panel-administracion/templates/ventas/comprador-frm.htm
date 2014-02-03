@@ -1,0 +1,69 @@
+<form action="" method="POST" enctype="multipart/form-data" name="frmComprador" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre" id="nombre" size="15" value="{$nombre}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Apellido</div>
+		<input type="text" name="apellido" id="apellido" size="15" value="{$apellido}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Email</div>
+		<input type="text" name="email" id="email" size="25" value="{$email}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Teléfono</div>
+		<input type="text" name="telefono" id="telefono" size="15" value="{$telefono}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Dirección</div>
+		<input type="text" name="direccion" size="40" value="{$direccion}" id="direccion" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Departamento</div>
+		<input type="text" name="departamento" id="departamento" size="15" value="{$departamento}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Ciudad</div>
+		<input type="text" name="ciudad" id="ciudad" size="15" value="{$ciudad}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Código Postal</div>
+		<input type="text" name="codigo_postal" id="codigo_postal" size="15" value="{$codigo_postal}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<table cellspacing="0" cellpadding="4" width="70%">
+			<tr>
+				<td class="nivel01">Orden N°</td>
+				<td class="nivel01">Fecha</td>
+				<td class="nivel01">Estado</td>
+				<td class="nivel01">Medio de pago</td>
+				<td class="nivel01">Subtotal</td>
+				<td class="nivel01">Costo de envío</td>
+				<td class="nivel01">Total</td>
+			</tr>
+		{foreach $ventas as $venta}
+			<tr>
+				<td class="nivel02" align="center"><a href="reportes.php?MOD=ventas&ACC=C&COD={$venta.id_venta}" class="link-campo">{$venta.id_venta}</a></td>
+				<td class="nivel02" align="left">{$venta.fechaDsc}</td>
+				<td class="nivel02" align="left">{$venta.estado_pago|upper}</td>
+				<td class="nivel02" align="left">
+					{if $venta.medio_pago == 1}
+					PAGO ONLINE OCA CARD
+					{elseif $venta.medio_pago == 0}
+					ABITAB
+					{/if}
+				</td>
+				<td class="nivel02" align="right">{$venta.subtotal}</td>
+				<td class="nivel02" align="right">{$venta.costo_envio}</td>
+				<td class="nivel02" align="right">{$venta.total}</td>
+			</tr>
+		{foreachelse}
+		<br />
+		<b>No se encontró ninguna venta asociada al comprador.<b/>
+		{/foreach}
+		</table>
+	</div>
+	<input type="hidden" id="id_comprador" name="id_comprador" value="{$id_comprador}">
+</form>

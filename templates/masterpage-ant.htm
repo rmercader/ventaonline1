@@ -1,0 +1,83 @@
+<!doctype html>  
+	<head>
+	<meta charset="UTF-8" />
+	<title>PRILI</title>
+	<link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<link rel="stylesheet" type="text/css" href="css/internos.css"/>
+	<!--start script cufon-->
+	<script type="text/javascript" src='js/cufon-yui.js'></script>
+	<script type='text/javascript' src='js/Trajan_Pro_400-Trajan_Pro_700.font.js'></script>
+	<script type="text/javascript">
+		Cufon.replace('h3,.prominent,nav,.submenu-fuente', {
+			hover: true
+		});
+	</script>
+	<!-- end script cufon--> 
+	<!-- BEGIN FOXYCART FILES -->
+	<link rel="stylesheet" href="//cdn.foxycart.com/static/scripts/colorbox/1.3.18/style1_fc/colorbox.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.foxycart.com/prili/foxycart.colorbox.js" type="text/javascript" charset="utf-8"></script>
+	<!-- END FOXYCART FILES -->
+	
+	<script src="js/tooltip-script.js" language="javascript" type="text/javascript"></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/keypress_validation.js'></script>
+	</head>
+<body>
+<header>
+	<div class="arriba">
+		<div class="adentro_arriba">
+			<div>
+				<ul class="sub-nav">
+					<li><a href="#"><img src="images/en.png" width="28" height="19" alt="Inglés" /> </a>
+					<a href="#"><img src="images/br.png" width="28" height="19" alt="Portugués" /> </a></li>
+					<li id="facebook"><a href="http://www.facebook.com/priliuruguay">Seguinos en </a></li>
+					<li id="compras"><a href="https://prili.foxycart.com/cart?name=" id="linkbolsa">Bolsa de compras</a></li>
+					<li><a href="#">Registrarse</a></li>
+					<li><a href="#" class="current">Usuario</a></li>
+				</ul>
+			</div>
+
+		   <!--start logo-->
+		   <a href="#" id="logo"><img src="images/logo.png" width="172" height="53" alt="logo"/></a>    
+		   <!--end logo-->
+
+		   <!--start menu-->
+			<nav>
+				<ul>
+					<li><a href="index.php" {if $homeActual eq 1}class="current"{/if}>Home</a></li>
+					<li><a href="empresa.php" {if $empresaActual eq 1}class="current"{/if}>Empresa</a></li>
+					<li id="nav-destacado"><a href="prendas.php?linea=1" {if $damaActual eq 1}class="current"{/if}>Dama</a></li>
+					<li id="nav-destacado"><a href="prendas.php?linea=2" {if $hombreActual eq 1}class="current"{/if}>Hombre</a></li>
+					<li id="nav-destacado"><a href="prendas.php?linea=3" {if $infantilActual eq 1}class="current"{/if}>Infantil</a></li>
+					<li><a href="contacto.php" {if $contactoActual eq 1}class="current"{/if}>Contacto</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+<!--end header-->
+{$contenido_seccion}
+<!--start footer-->
+<footer>
+	<div class="container">
+		<div id="FooterTree"> 
+			<ul class="sub-nav-footer">
+				<li><a href="donde-comprar.php">¿dónde comprar prili? </a></li>
+				<li><a href="calidad.php">calidad </a></li>
+				<li><a href="exportacion.php">exportación</a></li>
+				<li><a href="rse.php">responsabilidad social </a></li>
+				<li><a href="trabaje.php" class="current">trabajar con nosotros</a></li>
+				<li><a href="faqs.php"> FAQ</a></li>
+			</ul>
+		</div> 
+	</div>
+</footer>
+<div class="dire">Prili S.A.   Guaycurú 2837  -  Montevideo, Uruguay  -  Tel: (598+2) 203 61 68 / 209 90 89  -  Fax: (598+2) 209 48 14  -  E-mail: prili@prili.net</div>
+</body>
+</html>

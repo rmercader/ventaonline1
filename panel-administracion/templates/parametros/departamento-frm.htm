@@ -1,0 +1,50 @@
+{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+
+	var codigo = trim(document.getElementById("nombre_departamento").value);
+	if(codigo == ""){
+		errores += "Debe ingresar el nombre.\n";
+	}
+	
+	var costo = trim(document.getElementById("costo_envio").value);
+	if(costo == ""){
+		errores += "Debe ingresar el costo de envío.\n";
+	}
+	else {
+		if(isNaN(costo)){
+			errores += "Debe ingresar el costo de envío como un número válido.\n";
+		}
+	}
+	
+	if(errores != ""){
+		alert("No es posible ingresar el departamento:\n"+errores);
+	}
+	else{
+		document.forms["frmdepartamento"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmdepartamento" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_departamento" id="nombre_departamento" size="20" value="{$nombre_departamento}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Costo de envío</div>
+		<input type="text" name="costo_envio" size="5" value="{$costo_envio}" id="costo_envio" {$SOLO_LECTURA} onkeypress="return realNumOnly(event);">
+	</div>
+	<input type="hidden" name="ERROR" value="{$ERROR}">
+	<input type="hidden" id="id_departamento" name="id_departamento" value="{$id_departamento}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmdepartamento"].elements["ERROR"].value != "")
+		alert(document.forms["frmdepartamento"].elements["ERROR"].value);
+</script>
+{/literal}

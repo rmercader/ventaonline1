@@ -1,0 +1,82 @@
+<script type="text/javascript">
+	function cambiarEstado(){
+		var idVenta = $("#id_venta").val(),
+			estado = $("#estado").val();
+		xajax_modificarEstado(idVenta, estado);
+	}
+</script>
+<form action="" method="POST" enctype="multipart/form-data" name="frmVenta" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nro. Orden</div>
+		<input type="text" name="id_venta" id="id_venta" size="10" value="{$id_venta}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Fecha</div>
+		<input type="text" name="fecha" id="fecha" size="15" value="{$fecha}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Medio de pago</div>
+		<input type="text" name="medio_pago" id="medio_pago" size="40" value="{if $medio_pago == 1}PAGO ONLINE OCA CARD (Plan {$cuotas_oca} pagos){elseif $medio_pago == 0}ABITAB{/if}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Estado del pago</div>
+		<input type="text" name="estado_pago" id="estado_pago" size="15" value="{$estado_pago|upper}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Estado de la venta</div>
+		<select name="estado" id="estado">
+			{html_options values=$ids_estados selected=$estado output=$dsc_estados}
+		</select>
+	</div>
+	<div class="celda-campo" style="padding-top: 10px;">
+		<a href="javascript:cambiarEstado();">
+			<img src="templates/img/actualizar.png" alt="Actualizar" border="0" title="Actualizar estado" />
+		</a>
+	</div>
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">Subtotal</div>
+		<input type="text" name="subtotal" size="10" value="{$subtotal}" id="subtotal" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Costo de envío</div>
+		<input type="text" name="costo_envio" id="costo_envio" size="10" value="{$costo_envio}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Total</div>
+		<input type="text" name="total" id="total" size="10" value="{$total}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">
+			Comprador: <a class="link-campo" href="{$url_comprador}">{$nombre_comprador} ({if $invitado == 1}INVITADO{else}REGISTRADO{/if})</a>
+		</div>
+	</div>
+	<div class="clear">
+		<table cellspacing="0" cellpadding="4" width="70%">
+			<tr>
+				<td class="nivel01" colspan="6" style="border-bottom: none">Detalles de la venta</td>
+			</tr>	
+			<tr>
+				<td class="nivel01">Prenda</td>
+				<td class="nivel01">Color</td>
+				<td class="nivel01">Talle</td>
+				<td class="nivel01">Cantidad</td>
+				<td class="nivel01">Unitario</td>
+				<td class="nivel01">Subtotal</td>
+			</tr>
+		{foreach $items as $item}
+			<tr>
+				<td class="nivel02" align="left">{$item.nombre_prenda}</td>
+				<td class="nivel02" align="left">{$item.nombre_color|upper}</td>
+				<td class="nivel02" align="left">{$item.codigo}</td>
+				<td class="nivel02" align="right">{$item.cantidad}</td>
+				<td class="nivel02" align="right">{$item.precio}</td>
+				<td class="nivel02" align="right">{$item.subtotal}</td>
+			</tr>
+		{/foreach}
+		</table>
+	</div>
+	<input type="hidden" id="id_invitado" name="id_invitado" value="{$id_invitado}">
+</form>

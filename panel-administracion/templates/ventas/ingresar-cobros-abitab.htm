@@ -1,0 +1,14 @@
+<form action="" method="POST" enctype="multipart/form-data" name="frmAbitab">	
+	{$NAVEGADOR}
+	<div class="clear">
+		<div class="tit-campo">Ingrese el archivo de pagos recibido</div>
+		<input type="file" name="archivo" id="archivo" size="90">
+	</div>
+	<input type="hidden" name="error" value="{$error}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmAbitab"].elements["error"].value != "")
+		alert(document.forms["frmAbitab"].elements["error"].value);
+</script>
+{/literal}

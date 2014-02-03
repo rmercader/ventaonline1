@@ -1,0 +1,23 @@
+<!--start holder-->
+<div class="holder_content" style="height: 1060px">
+	{$submenu}
+	<div class="img-categoria">
+		<img src="{$url_img_categoria}" border="0" height="{$ANCHO_FOTO_CATEGORIA_PRENDA}" width="{$LARGO_FOTO_CATEGORIA_PRENDA}" 
+			alt="{$titulo_central}" />
+		<div class="prendas-preview">
+			{foreach $lstPrendas as $prenda}
+			<article class="holder_news">
+				<div id="destacada">
+					<a href="prenda-detalle.php?prenda={$prenda.id_prenda}">
+						<img src="{$prenda.url_preview}" width="{$LARGO_PREVIEW_PRENDA}" height="{$ANCHO_PREVIEW_PRENDA}" alt="" />
+					</a>
+				</div>
+				<p>{$prenda.nombre_prenda}</p>
+				<div id="price">${$prenda.precio} </div>
+				<span class="comprar"><a href="prenda-detalle.php?prenda={$prenda.id_prenda}">Comprar</a></span>
+			</article>
+			{/foreach}
+		</div>
+	</div>
+</div>
+<!--end holder-->

@@ -1,0 +1,10 @@
+{section name=linea loop=$REG}
+	<div class="image" id="{$REG[linea].id_color}">
+		
+		<img src="{$REG[linea].url_imagen_color}" border="0" width="{$LARGO_IMG_COLOR}" height="{$ANCHO_IMG_COLOR}" />
+		<div class="tit-campo">{$REG[linea].nombre_color}</div>
+		<a href="#" class="delete">
+			<img src="templates/img/ico-lst-eliminar.gif" />
+		</a>
+	</div>
+{/section}

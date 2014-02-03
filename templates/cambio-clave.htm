@@ -1,0 +1,32 @@
+<html>  
+	<head>
+	<meta charset="UTF-8" />
+	<script type="text/javascript">
+		Cufon.replace('h3,.prominent,.prominent2,nav,.submenu-fuente,.paso-checkout', {
+			hover: true
+		});
+		$("#btn-guardar-clave").click(function(){
+			alert("gato");
+		});
+	</script>
+	</head>
+<body>
+<form method="POST" action="" name="frmClave" id="frmClave" enctype="multipart/form-data">
+<div class="checkout" style="padding-left: 0px; width: 170px; height: 170px;">
+	<div>Contraseña actual</div>
+	<div>
+		<input name="clave_actual" id="clave_actual" type="password" />
+	</div>
+	<div style="padding-top: 10px">Contraseña nueva</div>
+	<div>
+		<input name="clave_nueva" id="clave_nueva" type="password" />
+	</div>
+	<div style="padding-top: 10px">Confirmación</div>
+	<div>
+		<input name="clave_nueva_conf" id="clave_nueva_conf" type="password" />
+	</div>
+	<div id="btn-guardar-clave" onclick="javascript:cambiarClave();"></div>
+</div>
+</form>
+</body>
+</html>

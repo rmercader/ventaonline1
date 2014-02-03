@@ -1,0 +1,81 @@
+{literal}
+<script language="javascript" src="templates/src/helper-prendas.js"></script>
+<script language="javascript">
+
+function beforeSubmit(){
+	var errores = "";
+
+	var nombre = document.getElementById("nombre_coleccion").value;
+	if(trim(nombre) == ""){
+		errores += "\t- El campo Nombre es obligatorio.\n";
+	}
+	if(errores != ""){
+		alert("No es posible ingresar la colección:\n"+errores);
+	}
+	else{
+		document.forms["frmColeccion"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmColeccion" onsubmit="beforeSubmit(); return false;">
+	{$NAVEGADOR}
+	{if $ACC eq 'M'}
+	<div class="button">
+		<img src="templates/img/adm-btn-prendas.gif" alt="Asociación de prendas" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=prendas-coleccion&COD={$id_coleccion}" />
+		<b>Asociación de prendas</b>
+	</div>
+	<div class="clear" />
+	<br>
+	{/if}
+    <div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_coleccion" size="50" maxlength="100" value="{$nombre_coleccion}" id="nombre_coleccion" {$SOLO_LECTURA} />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Línea</div>
+		{if $SOLO_LECTURA != ''}
+			<input type="text" name="linea_txt" size="10" value="{$linea_txt}" readonly="readonly">
+        {else}
+			<select name="id_linea" id="id_linea">
+				{html_options values=$linea_id selected=$id_linea output=$linea_nom}
+			</select>
+        {/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Fecha desde</div>
+  		{html_select_date prefix="fecha_desde" field_order=DMY time=$fecha_desde end_year="+2" month_format='%m'}
+	</div>
+    <div class="celda-campo">
+		<div class="tit-campo">Fecha hasta</div>
+  		{html_select_date prefix="fecha_hasta" field_order=DMY time=$fecha_hasta end_year="+2" month_format='%m'}
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Al salvar, redirigir a edición<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+    <div class="clear">
+		<div class="tit-campo">Descripción</div>
+		{$descripcion}
+	</div>
+    <div class="clear">
+		<div class="tit-campo">Foto de la colección</div>
+		{if $SOLO_LECTURA == ''}
+			<input type="file" name="foto" id="foto" size="90" />&nbsp;
+		{else}
+			<img src="{$src_foto}" border="0" alt="No hay foto disponible" />
+		{/if}
+	</div>
+	<input type="hidden" name="ERROR" value="{$ERROR}" />
+	<input type="hidden" name="id_coleccion" id="id_coleccion" value="{$id_coleccion}" />
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmColeccion"].elements["ERROR"].value != "")
+		alert(document.forms["frmColeccion"].elements["ERROR"].value);
+</script>
+{/literal}

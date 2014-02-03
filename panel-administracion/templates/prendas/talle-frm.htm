@@ -1,0 +1,45 @@
+﻿{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+
+	var codigo = trim(document.getElementById("codigo").value);
+	if(codigo == ""){
+		errores += "Debe ingresar el código.\n";
+	}
+	
+	var orden = trim(document.getElementById("orden_codigo").value);
+	if(codigo == ""){
+		errores += "Debe ingresar el orden según tamaño.\n";
+	}
+	
+	if(errores != ""){
+		alert("No es posible ingresar el talle:\n"+errores);
+	}
+	else{
+		document.forms["frmTalle"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmTalle" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Código</div>
+		<input type="text" name="codigo" id="codigo" size="20" value="{$codigo}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Orden según tamaño</div>
+		<input type="text" name="orden_codigo" size="5" value="{$orden_codigo}" id="orden_codigo" {$SOLO_LECTURA} onkeypress="return numOnly(event);">
+	</div>
+	<input type="hidden" name="ERROR" value="{$ERROR}">
+	<input type="hidden" id="id_talle" name="id_talle" value="{$id_talle}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmTalle"].elements["ERROR"].value != "")
+		alert(document.forms["frmTalle"].elements["ERROR"].value);
+</script>
+{/literal}

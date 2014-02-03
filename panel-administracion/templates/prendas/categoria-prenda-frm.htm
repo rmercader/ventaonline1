@@ -1,0 +1,67 @@
+﻿{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+
+	if(document.forms["frmCatProd"].elements["nombre_categoria_prenda"].value == ""){
+		errores = "Debe ingresar el nombre.\n";
+	}
+	
+	if(errores != ""){
+		alert("No es posible ingresar la categoria de prenda:\n"+errores);
+	}
+	else{
+		document.forms["frmCatProd"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmCatProd" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Línea</div>
+		{if $SOLO_LECTURA != ''}
+			<input type="text" name="linea_txt" size="40" value="{$linea_txt}" readonly="readonly">
+        {else}
+			<select name="id_linea" id="id_linea">
+				{html_options values=$linea_id selected=$id_linea output=$linea_nom}
+			</select>
+        {/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Categoría padre</div>
+		{if $SOLO_LECTURA != ''}
+			<input type="text" name="categoria_padre_txt" size="60" value="{$categoria_padre_txt}" readonly="readonly">
+        {else}
+			<select name="id_categoria_padre" id="id_categoria_padre">
+				{html_options values=$categoria_prenda_id selected=$id_categoria_padre output=$categoria_prenda_nom}
+			</select>
+        {/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Destacada<input type="checkbox" name="destacada" id="destacada" {$destacada}><label>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Nombre de la categoría de prendas</div>
+		<input type="text" name="nombre_categoria_prenda" size="60" value="{$nombre_categoria_prenda}" {$SOLO_LECTURA} maxlength="100">
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Foto de la categoría</div>
+		{if $SOLO_LECTURA == ''}
+			<input type="file" name="foto" id="foto" size="90">&nbsp;
+		{else}
+			<img src="{$src_foto}" border="0" alt="{$nombre_categoria_prenda}">
+		{/if}
+	</div>
+	<input type="hidden" name="ERROR" value="{$ERROR}">
+	<input type="hidden" id="id_categoria_prenda" name="id_categoria_prenda" value="{$id_categoria_prenda}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmCatProd"].elements["ERROR"].value != "")
+		alert(document.forms["frmCatProd"].elements["ERROR"].value);
+</script>
+{/literal}

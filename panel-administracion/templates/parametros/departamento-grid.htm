@@ -1,0 +1,16 @@
+<table width="98%" align="center" cellspacing="0">
+  <tr>
+  	<td align="center" class="nivel01" width="12%">Identificador</td>
+	<td align="center" class="nivel01">Nombre del departamento</td>
+    <td align="center" class="nivel01" width="15%">Costo de envío</td>
+    <td align="center" width="20" class="nivel01">&nbsp;</td>
+  </tr>
+  {section name=linea loop=$REG}
+  <tr>
+  	<td align="center" class="nivel02">{$REG[linea].id}</td>
+	<td align="left" class="nivel02">{$REG[linea].nombre_departamento}</td>
+    <td align="left" class="nivel02">{$REG[linea].costo_envio}</td>
+    <td width="20" align="left" class="nivel02" nowrap="nowrap">{include file="base_accion_grid.htm"}</td>
+  </tr>
+  {/section}
+</table>

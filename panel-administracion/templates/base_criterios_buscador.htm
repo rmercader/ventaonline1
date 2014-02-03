@@ -1,0 +1,16 @@
+<div id="buscador">
+	<div class="celda-campo">
+		<div class="tit-campo">Ordenar por</div>
+		<select name="ORDEN_CAMPO" id="ORDEN_CAMPO" style="font-size: 1.5em; height: 32px">
+			{html_options values=$ORDEN_ID selected=$ORDEN_DFTO output=$ORDEN_NOM}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Buscar por</div>
+		<input name="ORDEN_TXT" type="text" value="{$ORDEN_TXT}" size="20" class="campo-texto-w2">
+	</div>
+	<div class="celda-campo">
+		<input name="btOK" type="image" id="btOK" src="templates/img/btn-buscar.png" title="Iniciar b&uacute;squeda" vspace="10" class="nada">
+	</div>
+</div>
+

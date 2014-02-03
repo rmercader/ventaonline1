@@ -1,0 +1,52 @@
+<table cellspacing="0" cellpadding="0" id="fc_cart_table">
+<caption>Bolsa de compras</caption>
+	<thead>
+		<tr id="fc_cart_head">		
+			<th id="fc_cart_head_item"><span>Artículo</span></th>
+			<th id="fc_cart_head_quantity"><span>Cantidad</span></th>
+			<th id="fc_cart_head_price"><span>Precio</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		{foreach $items as $item}
+		<tr class="fc_cart_item fc_cart_item_last" id="product_16277558">
+			<td class="fc_cart_item_details"><span class="fc_cart_item_name">{$item.nombre}</span>
+				<ul class="fc_cart_item_options">
+					<li class="fc_cart_item_option fc_cart_item_color">
+						<span class="fc_cart_item_option_name">Color</span><span class="fc_cart_item_option_separator">:</span>
+						<span class="fc_cart_item_option_value">{$item.color}</span>
+					</li>
+					<li class="fc_cart_item_option fc_cart_item_talle">
+						<span class="fc_cart_item_option_name">Talle</span><span class="fc_cart_item_option_separator">:</span>
+						<span class="fc_cart_item_option_value">{$item.talle}</span>
+					</li>
+				</ul>
+			</td>
+			<td class="fc_cart_item_quantity">{$item.cantidad}</td>
+			<td class="fc_cart_item_price">
+				<span class="fc_cart_item_price_total">${$item.total}</span><br />
+				<span class="fc_cart_item_price_each">(${$item.unitario} unitario)</span>
+			</td>
+		</tr>
+		{/foreach}
+	</tbody>
+	<tfoot>
+		<tr id="fc_cart_foot_subtotal">
+			<td colspan="2" class="fc_col1">Subtotal:</td>
+			<td class="fc_col2"><span style="float: left;">$</span><div id="divSubtotal" style="float: left;">{$subtotal}</div></td>
+		</tr>
+
+		<tr id="fc_cart_foot_shipping">
+			<td colspan="2" class="fc_col1">Envio &amp; Manejo:</td>
+			<td class="fc_col2"><span style="float: left;">$</span><div id="divEnvio" style="float: left;">{if $costo_envio == ''}0.00{else}{$costo_envio}{/if}</div></td>
+		</tr>
+		<tr id="fc_cart_foot_shipping">
+			<td colspan="2" class="fc_col1">Descuento:</td>
+			<td class="fc_col2"><span style="float: left;">$</span><div id="divDescuento" style="float: left;">{if $valorDescuento == ''}0.00{else}{$valorDescuento}{/if}</div></td>
+		</tr>
+		<tr id="fc_cart_foot_total">
+			<td colspan="2" class="fc_col1">Total de la Orden:</td>
+			<td class="fc_col2"><span style="float: left;">$</span><div id="divTotal" style="float: left;">{$total}</div></td>
+		</tr>
+	</tfoot>
+</table>

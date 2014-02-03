@@ -1,0 +1,48 @@
+<table cellspacing="0" cellpadding="2" width="100%">
+	<tr>
+		<td class="nivel01">
+			Orden N°
+		</td>
+		<td class="nivel01">
+			Fecha
+		</td>
+		<td class="nivel01">
+			Estado del pago
+		</td>
+		<td class="nivel01">
+			Estado
+		</td>
+		<td class="nivel01">
+			Medio de pago
+		</td>
+		<td class="nivel01">
+			Subtotal
+		</td>
+		<td class="nivel01">
+			Costo de envío
+		</td>
+		<td class="nivel01">
+			Total
+		</td>
+		<td align="center" width="20" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td class="nivel02" align="center">{$REG[linea].id}</td>
+		<td class="nivel02" align="left">{$REG[linea].fechaDsc}</td>
+		<td class="nivel02" align="left">{$REG[linea].estado_pago|upper}</td>
+		<td class="nivel02" align="left">{$REG[linea].estado|upper}</td>
+		<td class="nivel02" align="left">
+			{if $REG[linea].medio_pago == 1}
+			PAGO ONLINE OCA CARD (Plan {$REG[linea].cuotas_oca} pagos)
+			{elseif $REG[linea].medio_pago == 0}
+			ABITAB
+			{/if}
+		</td>
+		<td class="nivel02" align="right">{$REG[linea].subtotal}</td>
+		<td class="nivel02" align="right">{$REG[linea].costo_envio}</td>
+		<td class="nivel02" align="right">{$REG[linea].total}</td>
+		<td width="20" align="left" class="nivel02" nowrap="nowrap">{include file="base_accion_grid.htm"}</td>
+	</tr>
+	{/section}
+</table>

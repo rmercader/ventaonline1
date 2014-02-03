@@ -1,0 +1,67 @@
+<style>
+	TH.nivel01 {
+		background-color: #000;
+		color: #FFF;
+		font-weight: bold;
+		border: 1px solid #969f94;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-right:4px;
+		padding-left:4px;
+		font-size: 16px;
+	}
+	TD.nivel02 {
+		border: 1px solid #969f94;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-right:4px;
+		padding-left:4px;
+		font-size: 16px;
+	}
+</style>
+<hr style="border: thin dashed;" />
+<br />
+<img height="53px" src="http://www.prili.net/images/logo.png">
+<br /><br />
+<b>PRILI S.A.</b>
+<br />
+<table width="100%" cellspacing="0" cellpadding="2">
+	<tr>
+		<th align="center" class="nivel01">CÓDIGO</th>
+		<th align="center" class="nivel01">FECHA EMISIÓN</th>
+		<th align="center" class="nivel01">CLIENTE</th>
+		<th align="center" class="nivel01">T. DOC.</th>
+		<th align="center" class="nivel01">NRO. DOC.</th>
+		<th align="center" class="nivel01">IMPORTE</th>
+		<th align="center" class="nivel01">D.C.</th>
+	</tr>
+	<tr>
+		<td align="center" class="nivel02">{$codigoPrili}</td>
+		<td align="center" class="nivel02">{$fechaEmision}</td>
+		<td align="center" class="nivel02">{$cliente}</td>
+		<td align="center" class="nivel02">1</td>
+		<td align="center" class="nivel02">{$documento}</td>
+		<td align="center" class="nivel02">${$importe}</td>
+		<td align="center" class="nivel02">{$digitoControl}</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="6" style="height: 30px;">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="6">
+			<img src="{$urlBarra25}" alt="Si aqui no ve un codigo de barras, este documento es invalido. Intente con la opción de descargar las imágenes." />
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="6">
+			<img src="{$urlBarra24}" alt="Si aqui no ve un codigo de barras, este documento es invalido. Intente con la opción de descargar las imágenes." />
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="6" style="height: 60px;">
+			Esta es tu ORDEN DE COMPRA, deberás imprimirla y pagarla en Abitab. <br />
+			Podrás realizar el pago hasta 10 (diez) dias después de realizada tu compra. <br />
+			Importante : las prendas las recibirás dentro de 4 días hábiles luego de haber realizado el pago.</td>
+	</tr>
+</table>
+<hr style="border: thin dashed;" />

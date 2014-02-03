@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Prili - Panel de Administración</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Description" content="">
+    <meta name="Keywords" content="">
+    <link href="templates/src/estilos.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="templates/src/tinyboxstyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="templates/src/menues.css" rel="stylesheet" type="text/css" media="screen">
+    <!--<link href="templates/src/jquery-ui.css" rel="stylesheet" type="text/css" media="screen">-->
+    <link href="templates/src/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="templates/src/tinydropdown.css" rel="stylesheet" type="text/css" media="screen">
+	
+	<script language="javascript" src="templates/src/jscripts.js"></script>
+    <script language="javascript" src="templates/src/jquery.js"></script>
+    <!--<script language="javascript" src="templates/src/jquery-ui.js"></script>-->
+	<script language="javascript" src="templates/src/jquery-ui-1.8.20.custom.min.js"></script>
+    <script language="javascript" src="templates/src/menues.js"></script>
+    <script language="javascript" src="templates/src/http.js"></script>
+    <script language="javascript" src="templates/src/clonar.js"></script>
+    <script language="javascript" src="templates/src/funcion.js"></script>
+    <script language="javascript" src="templates/src/keypress_validation.js"></script>
+    <script language="javascript" src="templates/src/tinybox.js"></script>
+	<script language="javascript" src="templates/src/tinydropdown.js"></script>
+    
+    {$AJAX_JAVASCRIPT}
+</head>
+<body>
+{literal}
+<style>
+body {padding-top:69px}
+#scripinty {height:90px; width:100%; position:fixed; top:0px; left:0px; margin:0; background:#666; min-width:900px}
+#scripintyleft {float:left; padding:10px 0 0 35px}
+#scripintyleft h1 {font:32px 'Trebuchet MS',Verdana; color:#fff; text-shadow:1px 1px #000}
+#scripintyleft p {color:#aaa; font-size:16px; font-style:italic}
+#scripintyleft p a {color:#eee; text-decoration:none}
+#scripintyleft p a:hover {color:#fff}
+#scripintyleft span {font:15px Arial,Verdana; color:#ddd; text-shadow:1px 1px #444}
+#scriptinyright {float:right; padding:10px 15px 0; height:80px; width:300px; background:#555}
+#scriptinyright p {color:#aaa; font-size:16px;}
+</style>
+{/literal}
+
+<div id="scripinty">
+	<div id="scripintyleft">
+		<img src="templates/img/logo-prili.png" />
+		<h1>Panel de administración</h1>
+	</div>
+	<div id="scriptinyright"><p>{$USUARIO}</p></div>
+</div>
+<div class="nav">
+    <ul id="menu" class="menu">
+		<li class="nodiv"><a href="inicio.php">Home</a></li>
+		<li><a href="#">One</a>
+            <ul>
+                <li><a href="#">One</a></li>
+                <li><a href="#">Two</a></li>
+                <li class="submenu">
+                    <a href="#">Three</a>
+                    <ul>
+                        <li class="noborder"><a href="#">One</a></li>
+                        <li><a href="#">Two</a></li>
+                        <li><a href="#">Three</a></li>
+                    </ul>
+                </li>      
+            </ul>
+        </li>
+        <li><span>Two</span>
+            <ul>
+                <li><a href="#">One</a></li>
+                <li><a href="#">Two</a></li>
+                <li><a href="#">Three</a></li>
+                <li class="submenu">
+					<span>No Link</span><ul>
+                		<li class="noborder"><a href="#">One</a></li>
+                		<li><a href="#">Two</a></li>
+                		<li><a href="#">Three</a></li>
+                		<li><a href="#">Four</a></li>
+                		<li><a href="#">Five</a></li>
+					</ul>
+				</li>
+                <li><a href="#">Five</a></li>
+                <li><a href="#">Six</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Three</a>
+            <ul>
+                <li><a href="#">One</a></li>
+                <li><a href="#">Two</a></li>
+                <li><a href="#">Three</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Four</a>
+            <ul id="info">
+				<li>
+                	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce justo nulla, malesuada in porta vitae, fermentum ac nulla.</p>
+				</li>
+            </ul>
+        </li>
+		<li class="nodiv" style="float:right"><a href="javascript:;" onclick="(confirm('Desea cerrar la sesión?'))?location.href='./logout.php':'';return false;" title="Cerrar la sesión">Cerrar sesión</a></li>
+    </ul>
+</div>
+<div id="contenido_modulo">
+	{$CONTENIDO}
+</div>
+{literal}
+<script type="text/javascript">
+var dropdown=new TINY.dropdown.init("dropdown", {id:'menu', active:'menuhover'});
+</script>
+{/literal}
+</body>
+</html>

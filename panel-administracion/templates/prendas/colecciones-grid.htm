@@ -1,0 +1,25 @@
+<table width="98%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" width="15%" class="nivel01">Identificador</td>
+		<td align="center" class="nivel01">Nombre</td>
+		<td align="center" class="nivel01">Línea</td>
+        <td align="center" class="nivel01">Fecha desde</td>
+		<td align="center" class="nivel01">Fecha hasta</td>
+		<td align="center" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_coleccion}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_linea}</td>
+		<td align="left" class="nivel02">{$REG[linea].fecha_desde}</td>
+		<td align="left" class="nivel02">{$REG[linea].fecha_hasta}</td>
+		<td width="140px" class="nivel02" nowrap="nowrap">
+			<a href="admin-catalogo.php?MOD=prendas-coleccion&COD={$REG[linea].id}" title="Asociación de prendas">
+                <img src="templates/img/adm-prendas.gif" alt="Asociación de prendas" border="0" hspace="2" />
+            </a>
+			{include file="base_accion_grid.htm"}
+		</td>
+	</tr>
+	{/section}
+</table>

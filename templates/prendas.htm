@@ -1,0 +1,64 @@
+{literal}
+<script language="javascript">
+	function paginaSiguiente(){
+		var idCategoria = parseInt(document.getElementById("idCategoria").value);
+		var idColeccion = parseInt(document.getElementById("idColeccion").value);
+		if(idCategoria > 0){
+			document.getElementById("grilla-prendas").innerHTML = '<img src="imagenes/cargando1.gif" />';
+			var paginaActual = parseInt(document.getElementById("pagina").value);
+			xajax_listarPrendasCategoria(idCategoria, paginaActual + 1);
+		}
+		if(idColeccion > 0){
+			document.getElementById("grilla-prendas").innerHTML = '<img src="imagenes/cargando1.gif" />';
+			var paginaActual = parseInt(document.getElementById("pagina").value);
+			xajax_listarPrendasColeccion(idColeccion, paginaActual + 1);
+		}		
+	}
+	function paginaAnterior(){
+		var idCategoria = parseInt(document.getElementById("idCategoria").value);
+		var idColeccion = parseInt(document.getElementById("idColeccion").value);
+		if(idCategoria > 0){
+			document.getElementById("grilla-prendas").innerHTML = '<img src="imagenes/cargando1.gif" />';
+			var paginaActual = parseInt(document.getElementById("pagina").value);
+			xajax_listarPrendasCategoria(idCategoria, paginaActual - 1);
+		}
+		if(idColeccion > 0){
+			document.getElementById("grilla-prendas").innerHTML = '<img src="imagenes/cargando1.gif" />';
+			var paginaActual = parseInt(document.getElementById("pagina").value);
+			xajax_listarPrendasColeccion(idColeccion, paginaActual - 1);
+		}
+	}
+	
+	$(document).ready(function(){/*
+		$(".botones_paginas").click(function(){
+			
+		});*/
+	});
+</script>
+{/literal}
+<input type="hidden" name="pagina" id="pagina" value="{$pagina}"/>
+<input type="hidden" name="idCategoria" id="idCategoria" value="{$idCategoria}"/>
+<input type="hidden" name="idColeccion" id="idColeccion" value="{$idColeccion}"/>
+<div class="abajo_internas">
+	<div class="abajo_interna">
+		<!--start holder-->
+		<div class="holder_content">
+		<aside class="group1">
+			<h3>{$nombreLinea}</h3>
+			<div class="headers_internas" style="background-image: url({$url_img_categoria});"></div>
+			<br />
+			<div id="grilla-prendas">{$grillaPrendas}</div>
+			<div class="contenedor_botones">
+				<div class="botones_paginas" onclick="paginaSiguiente();" style="display: {$sig_display};" id="sig">Siguiente</div>
+				<div class="botones_paginas" onclick="paginaAnterior();" style="display: {$ant_display};" id="ant">Anterior</div>				
+			</div>
+		</aside>
+		<section class="group2">
+			<article class="holder_gallery">
+				{$submenu}
+			</article>
+		</section>
+		</div>
+		<!--end holder-->
+	</div>
+</div>

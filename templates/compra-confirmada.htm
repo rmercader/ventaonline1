@@ -1,0 +1,185 @@
+<!doctype html>  
+	<head>
+	<meta charset="UTF-8" />
+	<title>PRILI - Orden de compra</title>
+	<link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+	<link rel="stylesheet" type="text/css" href="css/ultimo2.css"/>
+	<link rel="stylesheet" type="text/css" href="css/internos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/messages.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="css/FoxyCart - Styles.css"/>-->
+	<!--start script cufon-->
+	<script type="text/javascript" src='js/cufon-yui.js'></script>
+	<script type='text/javascript' src='js/Trajan_Pro_400-Trajan_Pro_700.font.js'></script>
+	<script type="text/javascript">
+		Cufon.replace('h3,.receipt-paso', {
+			hover: true
+		});
+	</script>
+	<!-- end script cufon-->
+	<!-- BEGIN FOXYCART FILES -->
+	<link rel="stylesheet" href="//cdn.foxycart.com/static/scripts/colorbox/1.3.18/style1_fc/colorbox.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.foxycart.com/prili/foxycart.colorbox.js" type="text/javascript" charset="utf-8"></script>
+	<!-- END FOXYCART FILES -->
+	<script src="js/tooltip-script.js" language="javascript" type="text/javascript"></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/keypress_validation.js'></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/funcion.js'></script>
+	<script type="text/javascript" src='js/messages.js'></script>
+	{$AJAX_JAVASCRIPT}
+	</head>
+<body>
+<script>
+	jQuery.getJSON('https://'+storedomain+'/cart?'+fcc.session_get()+'&empty=true&callback=?', function(cart) {
+		// Codigo para manejar el evento de vaciado del carrito
+		if(cart.products.length > 0){
+			alert("La bolsa de compras no quedó vacía.");
+		}
+	});
+</script>
+<script type="text/javascript">
+	// La tipografia
+	Cufon.replace('.paso-receipt', {
+		hover: true
+	});
+	$(document).ready(function(){
+		$("#btn-continuar").click(function(){
+			window.location = "index.php";
+		});
+	});
+</script>
+<div class="abajo_internas">
+	<div class="abajo_interna">
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="receipt">
+				<h3>Detalles de la compra</h3> 
+				<div class="texto_internas" style="float: left; width: 100%;">
+					<div class="receipt-block" style="width: 45%;">
+						<div class="receipt-paso">General</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Respuesta del procesador: </label>
+									<label class="dato">{$respProcesador}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Comerciante: </label>
+									<label class="dato">PRILI S.A.</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Fecha: </label>
+									<label class="dato">{$fecha}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-block" style="width: 40%;" id="divDetalles">
+						<div class="receipt-paso">Detalles</div>
+						{$detallesVenta}
+					</div>
+					<div class="receipt-block" style="clear: both; width: 45%;">
+						<div class="receipt-paso" style="padding-top: 50px;">Datos del comprador</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Nombre: </label>
+									<label class="dato">{$nombre}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Apellido: </label>
+									<label class="dato">{$apellido}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Email: </label>
+									<label class="dato">{$email}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Dirección: </label>
+									<label class="dato">{$direccion}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Departamento: </label>
+									<label class="dato">{$departamento}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Ciudad: </label>
+									<label class="dato">{$ciudad}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Código Postal: </label>
+									<label class="dato">{$codigo_postal}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Teléfono: </label>
+									<label class="dato">{$telefono}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-block" style="width: 42%;">
+						<div class="receipt-paso" style="padding-top: 50px;">Resumen de la Orden</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Id. de la Orden: </label>
+									<label class="dato">{$idVenta}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Datos del pago: </label>
+									<label class="dato">{$datosPago}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Estado del pago: </label>
+									<label class="dato">{$estadoPago}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Estado de la compra: </label>
+									<label class="dato">{$estadoVenta}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Subtotal: </label>
+									<label class="dato">{$subtotal}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Envío: </label>
+									<label class="dato">{$costo_envio}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Descuento: </label>
+									<label class="dato">{$descuento}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Total de la orden: </label>
+									<label class="dato">{$total}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-confirm" id="btn-continuar">
+						<img src="imagenes/bot-continuargris.png" />
+					</div>
+					
+					<div style="clear: both;">
+						{if $mensajeAbitab neq ''}
+						<p>En instantes te llegará un email con los detalles de tu ORDEN DE COMPRA. Deberás imprimirla y pagarla en Abitab.<br />Podrás realizar el pago hasta 10 (diez) dias después de realizada tu compra.<br />
+						Importante: las prendas las recibirás dentro de 4 días hábiles luego de haber realizado el pago.
+						<br />
+						{else}
+						<p>En instantes te llegará un email con los detalles de tu ORDEN DE COMPRA.<br />
+						Importante: las prendas las recibirás dentro de los próximos 4 días hábiles.<br />
+						{/if}
+						Si tenés algún inconveniente con la Compra y/o la entrega, comunicate con nosotros via mail a <a href="mailto:ventasonline@prili.net">ventasonline@prili.net</a> o a los teléfonos (598+2) 203 61 68 / 209 90 89.	
+						</p>
+					</div>
+				</div>
+			</aside>
+		</div>
+		<!--end holder-->
+	</div>
+</div>
+</body>
+</html>

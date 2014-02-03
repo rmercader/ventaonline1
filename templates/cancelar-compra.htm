@@ -1,0 +1,156 @@
+<!doctype html>  
+	<head>
+	<meta charset="UTF-8" />
+	<title>PRILI - Cancelación de Orden de compra</title>
+	<link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+	<link rel="stylesheet" type="text/css" href="css/ultimo2.css"/>
+	<link rel="stylesheet" type="text/css" href="css/internos.css"/>
+	<!--start script cufon-->
+	<script type="text/javascript" src='js/cufon-yui.js'></script>
+	<script type='text/javascript' src='js/Trajan_Pro_400-Trajan_Pro_700.font.js'></script>
+	<script type="text/javascript">
+		Cufon.replace('h3,.receipt-paso', {
+			hover: true
+		});
+	</script>
+	<!-- end script cufon-->
+	<script src="js/jquery-1.7.1.min.js" language="javascript" type="text/javascript"></script>
+	</head>
+<body>
+<script type="text/javascript">
+	// La tipografia
+	Cufon.replace('.paso-receipt', {
+		hover: true
+	});
+	$(document).ready(function(){
+		$("#btn-continuar").click(function(){
+			$("#frmAnulacion").submit();
+		});
+	});
+</script>
+<form method="POST" action="" name="frmAnulacion" id="frmAnulacion" enctype="multipart/form-data">
+<div class="abajo_internas">
+	<div class="abajo_interna">
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="receipt">
+				{if $cancelada == 'S'}
+				<h3>La orden de compra fue cancelada correctamente</h3>
+				{elseif $error != ''}
+				<h3>{$error}</h3> 
+				{else}
+				<h3>Cancelación de orden de compra</h3> 
+				<div class="texto_internas" style="float: left; width: 100%;">
+					<div class="receipt-block" style="width: 45%;">
+						<div class="receipt-paso">General</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Comerciante: </label>
+									<label class="dato">PRILI S.A.</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Fecha: </label>
+									<label class="dato">{$fecha}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-block" style="width: 40%;" id="divDetalles">
+						<div class="receipt-paso">Detalles</div>
+						{$detallesVenta}
+					</div>
+					<div class="receipt-block" style="clear: both; width: 45%;">
+						<div class="receipt-paso" style="padding-top: 50px;">Datos del comprador</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Nombre: </label>
+									<label class="dato">{$nombre}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Apellido: </label>
+									<label class="dato">{$apellido}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Email: </label>
+									<label class="dato">{$email}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Dirección: </label>
+									<label class="dato">{$direccion}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Departamento: </label>
+									<label class="dato">{$departamento}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Ciudad: </label>
+									<label class="dato">{$ciudad}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Código Postal: </label>
+									<label class="dato">{$codigo_postal}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Teléfono: </label>
+									<label class="dato">{$telefono}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-block" style="width: 42%;">
+						<div class="receipt-paso" style="padding-top: 50px;">Resumen de la Orden</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label class="titulo">Id. de la Orden: </label>
+									<label class="dato">{$idVenta}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Datos del pago: </label>
+									<label class="dato">{$datosPago}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Estado del pago: </label>
+									<label class="dato">{$estadoPago}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Estado de la compra: </label>
+									<label class="dato">{$estadoVenta}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Subtotal: </label>
+									<label class="dato">{$subtotal}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Envío: </label>
+									<label class="dato">{$costo_envio}</label>
+								</li>
+								<li class="customer-add-row">
+									<label class="titulo">Total de la orden: </label>
+									<label class="dato">{$total}</label>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="receipt-confirm">
+						<h3>para confirmar la cancelación, haga click en continuar</h3>
+					</div> 
+					<div class="receipt-confirm" id="btn-continuar">
+						<img src="imagenes/bot-continuargris.png" />
+					</div>
+				</div>
+				{/if}
+			</aside>
+		</div>
+		<!--end holder-->
+	</div>
+</div>
+</form>
+</body>
+</html>

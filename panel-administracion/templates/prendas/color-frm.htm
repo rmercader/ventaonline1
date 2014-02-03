@@ -1,0 +1,43 @@
+﻿{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+
+	if(document.forms["frmColor"].elements["nombre_color"].value == ""){
+		errores = "Debe ingresar el nombre.\n";
+	}
+	
+	if(errores != ""){
+		alert("No es posible ingresar el color:\n"+errores);
+	}
+	else{
+		document.forms["frmColor"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmColor" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_color" size="20" value="{$nombre_color}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Imagen del color</div>
+		{if $SOLO_LECTURA == ''}
+			<input type="file" name="imagen" id="imagen" size="60">&nbsp;
+		{else}
+			<img src="{$src_imagen}" border="0" alt="{$nombre_color}">
+		{/if}
+	</div>
+	<input type="hidden" name="ERROR" value="{$ERROR}">
+	<input type="hidden" id="id_color" name="id_color" value="{$id_color}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmColor"].elements["ERROR"].value != "")
+		alert(document.forms["frmColor"].elements["ERROR"].value);
+</script>
+{/literal}

@@ -1,0 +1,28 @@
+<table width="100%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" class="nivel01">Id.</td>
+		<td align="center" class="nivel01">Nombre</td>
+		<td align="center" class="nivel01">Apellido</td>
+		<td align="center" class="nivel01">Email</td>
+		<td align="center" class="nivel01">Dirección</td>
+		<td align="center" class="nivel01">Departamento</td>
+		<td align="center" class="nivel01">Ciudad</td>
+		<td align="center" class="nivel01">Teléfono</td>
+		<td align="center" class="nivel01">Código Postal</td>
+		<td align="center" width="20" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre}</td>
+		<td align="left" class="nivel02">{$REG[linea].apellido}</td>
+		<td align="left" class="nivel02">{$REG[linea].email}</td>
+		<td align="left" class="nivel02">{$REG[linea].direccion}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_departamento}</td>
+		<td align="left" class="nivel02">{$REG[linea].ciudad}</td>
+		<td align="left" class="nivel02">{$REG[linea].telefono}</td>
+		<td align="left" class="nivel02">{$REG[linea].codigo_postal}</td>
+		<td width="20" align="left" class="nivel02" nowrap="nowrap">{include file="base_accion_grid.htm"}</td>
+	</tr>
+	{/section}
+</table>

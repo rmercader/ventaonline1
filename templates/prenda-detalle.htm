@@ -1,0 +1,225 @@
+<script type="text/javascript" src="js/jquery.bxGallery.js"></script>
+{$AJAX_JAVASCRIPT}
+<div class="abajo_internas">
+	<div class="abajo_interna">	
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="group1">
+				<ul id="fotos">
+					{foreach $lstFotos as $fotoPrenda}
+					<li>
+						<img src="{$fotoPrenda}" border="0" height="{$ANCHO_FOTO_PRENDA}" width="{$LARGO_FOTO_PRENDA}" alt="" title="" />
+					</li>
+					{/foreach}
+				</ul>
+				<div class="dsc-prenda">
+					<h3>{$nombre_prenda}</h3>
+					{$descripcion}
+					<br>
+					<span class="precio-prenda">$ {$precioLocal} *</span>
+					<div style="padding-top: 10px;"><h3 class="submenu" style="width: 100%;">Colores disponibles</h3></div>
+					<div id="paleta-colores">
+						{foreach $lstThuColores as $thuColor}
+							<img src="{$thuColor.thumbnail}" border="0" width="{$LARGO_THU_COLOR}" height="{$ANCHO_THU_COLOR}" 
+								onmouseover="tooltip.show('<img src=\'{$thuColor.foto}\' border=\'0\' /><div style=\'padding-top: 1px;\'>{$thuColor.id_color} - {$thuColor.nombre_color}</div>');" onmouseout="tooltip.hide();" />
+						{/foreach}
+					</div>
+					<div id="holder-carrito">
+						<input type="hidden" name="haystock" id="haystock" value="0" />
+						<form action="https://prili.foxycart.com/cart" method="post" name="frmItemBolsa" id="frmItemBolsa" >
+							<input type="hidden" id="id" />
+							<input type="hidden" id="code" value="{$id_prenda}" name="code{$idPrendaName}" />
+							<input type="hidden" id="name" name="name{$nombrePrendaName}" value="{$nombre_prenda}" />
+							<input type="hidden" id="price" name="price{$precioName}" value="{$precio}" />
+							<input type="hidden" id="quantity_max" />
+							
+							<div class="celda-campo">
+								<div class="tit-campo">Color</div>
+								<select name="color" id="color" class="stockvars">
+									<option value="0">---</option>
+									{html_options values=$ids_colores output=$dsc_colores}
+								</select>
+							</div>
+							<div class="celda-campo">
+								<div class="tit-campo">Talle</div>
+								<select name="talle" id="talle" class="stockvars">
+									<option value="0">---</option>
+									{html_options values=$ids_talles output=$dsc_talles}
+								</select>
+							</div>
+							<div class="celda-campo">
+								<div class="tit-campo">Cantidad</div>
+								<input type="text" name="quantity{$quantityName}" id="quantity" size="4" onkeypress="return numOnly(event);" value="1" class="stockvars" />
+							</div>
+							<br>
+							<div class="celda-campo">
+								<div class="tit-campo" style="clear: both; height: 15px;" id="infostock">&nbsp;</div>
+							</div>
+							<br>
+							<div class="tit-campo" style="clear: both;">
+								<input type="submit" value="Agregar a la bolsa" class="btn-comprar" id="btnComprar" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</aside>
+			<section class="group2">
+				<article class="holder_gallery">
+					{$submenu}
+				</article>
+			</section>
+		</div>
+		<!--end holder-->
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+
+	function setearMontoMinimoDeCompraEnCarrito(minimoPesos, minimoUsd){
+		var convusd = 0.0506;
+		// Pesos
+		jQuery.getJSON('https://'+storedomain+'/cart?'+fcc.session_get()+'&h:minimop='+minimoPesos+'&h:minimod='+minimoUsd+'&h:convusd='+convusd+'&output=json&callback=?', function(data) {
+			//console.log("Minimo de compra en pesos: " + FC.json.custom_fields["minimop"]);
+		});
+		
+		/*// Dolares
+		jQuery.getJSON('https://'+storedomain+'/cart?'+fcc.session_get()+'&h:minimod='+minimoUsd+'&output=json&callback=?', function(data) {
+			//console.log("Minimo de compra en dolares: " + FC.json.custom_fields["minimod"]);
+		});*/
+	}
+
+	$(document).ready(function(){
+	
+		// Para setear el monto minimo de compra
+		xajax_obtenerMinimoParaCompra();
+		
+		$('#fotos').bxGallery({
+			maxwidth: {/literal}{$LARGO_FOTO_PRENDA}{literal},
+			maxheight: {/literal}{$ANCHO_FOTO_PRENDA}{literal},
+			thumbwidth: 75,
+			thumbplacement: 'bottom',
+			thumbcontainer: {/literal}{$LARGO_FOTO_PRENDA}{literal},
+			wrapperclass: 'img-prenda',
+			load_image: 'panel-administracion/templates/img/preload.gif'
+		});
+		Cufon.replace('.precio-prenda', {
+			hover: true
+		});
+		$(".stockvars").change(function(){
+			$("#infostock").html("");
+			var idPrenda = $("#code").attr("value");
+			var idColor = $("#color").attr("value").split(" - ")[0];
+			var codTalle = $("#talle").attr("value").split("||")[0];
+			var cantidad = $("#quantity").attr("value")*1;
+			
+			if($("#color")[0].selectedIndex > 0 && $("#talle")[0].selectedIndex > 0 && cantidad > 0){
+				xajax_validarItemCompra(idPrenda, idColor, codTalle, cantidad);
+			}
+		});
+
+		fcc.events.cart.preprocess.add(function(e, arr) {
+			if (e.tagName == 'FORM') {
+				var errores = "";
+				var idPrenda = $("#code").attr("value");
+				var idColor = '';
+				var codTalle = '';
+				var cantidad = $("#quantity").attr("value")*1;
+				
+				if($("#color")[0].selectedIndex == 0){
+					errores += "Por favor seleccione un color.<br />";
+				}
+				else {
+					idColor = $("#color").attr("value").split(" - ")[0];
+				}
+				if($("#talle")[0].selectedIndex == 0){
+					errores += "Por favor seleccione un talle.<br />";
+				}
+				else {
+					codTalle = $("#talle").attr("value").split("||")[0];
+				}
+				if(cantidad <= 0){
+					errores += "Por favor indique la cantidad.<br />";
+				}
+				if(errores == ""){
+					var hayStock = $.ajax({
+						type: "GET",
+						url: 'comprobar-stock.php?prenda='+idPrenda+'&color='+idColor+'&talle='+codTalle+'&cantidad='+cantidad,
+						async: false,
+					}).responseText;
+					if(hayStock == 0){
+						errores += "No hay stock para el color, talle y cantidad seleccionada.<br />";
+					}
+				}
+				if(errores != ""){
+					TINY.box.show({
+						html: errores,
+						boxid: "boxid"
+					});
+					$("#boxid").css("font-weight", "bold");
+					$("#boxid").css("color", "#D03B39");
+					$("#boxid").css("background-color", "#F7E0DF");
+					return false;
+				}
+			}
+			return true;
+		});
+		
+		// Restart the process event collection object
+		fcc.events.cart.process = new FC.client.event();
+
+		// Define the new process event
+		fcc.events.cart.process.add(function(e){
+			var href = '';
+			if (e.tagName == 'A') {
+				href = e.href;
+			} 
+			else if (e.tagName == 'FORM') {
+				href = 'https://'+storedomain+'/cart?'+jQuery(e).serialize();
+			}
+			if (href.match("cart=(checkout|updateinfo)") || href.match("redirect=")) {
+				return true;
+			} 
+			else if (href.match("cart=view")) {
+				jQuery.colorbox({
+					href: href,
+					iframe: true,
+					width: colorbox_width,
+					height: colorbox_height,
+					close: colorbox_close,
+					onClosed: function(){fcc.events.cart.postprocess.execute(e);}
+				});
+				return false;
+			} 
+			else {
+				// Add notification that product is being added here.
+				// ...
+				jQuery.getJSON(href + '&output=json&callback=?', function(data){
+					// Automatically update JSON and minicart helper objects
+					fcc.cart_update();
+
+					// Add notification that the product has successfully been added here.
+					TINY.box.show({
+						url: 'item-agregado-ok.html',
+						boxid: "boxid"
+					});
+					$("#boxid").css("font-weight", "bold");
+					$("#boxid").css("color", "#4f8a10");
+					$("#boxid").css("background-color", "#edfced");
+					actualizarLinkBolsa();
+				});
+				return false;
+			}
+		});
+		
+		fcc.events.cart.postprocess.add(function(e){
+			actualizarLinkBolsa();
+			return false;
+		});
+	});
+	
+	function abrirBolsa(){
+		TINY.box.hide();
+		window.location = 'https://prili.foxycart.com/cart?cart=view';
+	}
+</script>
+{/literal}

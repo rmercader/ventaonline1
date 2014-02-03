@@ -1,0 +1,132 @@
+<!doctype html>  
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+<body>
+	<style>
+		#fc_cart_table {
+			border-collapse: collapse;
+			clear: both;
+			font-size: 11px;
+			width: 100%;
+		}
+		#fc_cart_table caption {
+			display: none;
+		}
+		#fc_cart_table td, #fc_cart_table th {
+			color: #666666;
+			font-size: 11px;
+			padding: 2px 5px;
+			text-align: left;
+			vertical-align: top;
+		}
+		#fc_cart_head_item {
+			width: 50%;
+		}
+		#fc_cart_head_quantity, #fc_cart_head_price {
+			width: 25%;
+		}
+		#fc_cart_table td {
+			border-bottom: 2px solid;
+		}
+		#fc_cart_table thead th {
+			background: none repeat scroll 0 0 #666666;
+			color: #FFFFFF;
+			font-size: 14px;
+			font-weight: normal;
+			letter-spacing: 1px;
+			text-transform: lowercase;
+		}
+		#fc_cart_table tfoot td {
+			background: none repeat scroll 0 0 #EEEEEE;
+			border-bottom: 1px solid #AAAAAA;
+			font-size: 11px;
+		}
+		#fc_cart_table tfoot td.fc_col1 {
+			text-align: right;
+		}
+		#fc_cart_foot_total td.fc_col1 {
+			color: #CCCCCC !important;
+			text-align: right;
+		}
+		#fc_cart_foot_subscriptions td, #fc_cart_foot_future_shipping td {
+			color: #990000;
+		}
+		#fc_cart_foot_subscriptions td.fc_col1, #fc_cart_foot_future_shipping td.fc_col1 {
+			font-style: italic;
+		}
+		#fc_cart_table #fc_cart_foot_total td {
+			background: none repeat scroll 0 0 #666666;
+			color: #FFFFFF;
+			font-weight: normal;
+			letter-spacing: 1px;
+		}
+		#fc_cart_table #fc_empty_cart {
+			padding: 40px;
+			text-align: center;
+		}
+		#fc_cart_table .fc_cart_remove_left, #fc_cart_table .fc_cart_remove_right {
+			display: none;
+		}
+		input.fc_cart_item_quantity {
+			float: left;
+		}
+		/* End foxycart table */
+		/* Foxycart cancel & continue shopping */
+		#fc_cancel_continue_shopping {
+			margin:0 0 10px;
+		}
+		#fc_cancel_continue_shopping a {
+			color: #444444;
+			line-height: 1.2;
+			margin: 0;
+			padding: 0;
+			text-decoration: underline;
+		}
+	</style>
+	<div>
+		<font face="Arial, Helvetica, sans-serif">
+			<br />
+			<img height="53px" src="http://www.prili.net/images/logo.png"><br /><br />
+			<b>PRILI S.A.</b><br />
+			<i>{$mensaje}:</i><br /><hr>
+			<br />
+			<b>Detalle de la compra:</b><br /><br />
+			Fecha de compra: <b>{$fecha}</b> <br />	
+			Nombre: <b>{$nombre} {$apellido}</b> <br />
+			Email: <b>{$email}</b> <br />
+			Dirección: <b>{$direccion}</b> <br />
+			Teléfono: <b>{$telefono}</b> <br />
+			Departamento: <b>{$departamento}</b> <br />
+			Ciudad: <b>{$ciudad}</b> <br />
+			Código Postal: <b>{$codigo_postal}</b> <br />
+			<br />
+			<div style="width: 35%">{$detallesVenta}</div>
+			<br /><br />
+			Id. de la Orden: <b>{$id_venta}</b> <br />
+			Forma de pago: <b>{$infoPago}</b> <br />
+			Estado del pago: <b>{$estadoPago}</b> <br />
+			Estado de la compra: <b>{$estadoVenta}</b> <br />
+			Subtotal: <b>{$subtotal}</b> <br />
+			Costo de envío: <b>{$costo_envio}</b> <br />
+			Descuento: <b>{$descuento}</b> <br />
+			Total: <b>{$total}</b> <br />
+			<br />
+			{if $talonAbitab == ''}
+			Esta es tu ORDEN DE COMPRA.<br />
+			Importante: las prendas las recibirás dentro de los próximos 4 días hábiles.<br />
+			{/if}
+			Si tuviste algún inconveniente con la Compra y/o la entrega, comunicate con nosotros via mail a <a href="mailto:ventasonline@prili.net">ventasonline@prili.net</a> o a los teléfonos (598+2) 203 61 68 / 209 90 89.<br />
+			{if $urlAnulacion != ''}
+			<br /><br />
+			Para cancelar su compra, siga este link: 
+			<br />
+			<a href="{$urlAnulacion}" target="blank">{$urlAnulacion}</a>
+			{/if}
+			{if $talonAbitab != ''}
+				{$talonAbitab}
+			{/if}
+		</font>
+	</div>
+</body>
+</html>

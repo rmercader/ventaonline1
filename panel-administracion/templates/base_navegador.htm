@@ -1,0 +1,41 @@
+<div id="paginador">
+{if $SCRIPT_ADD != ''}
+	<div class="item-paginador">
+		<a href="{$SCRIPT_ADD}">
+			<img src="templates/img/btn-nuevo.png" alt="Agregar registro" title="Agregar registro" name="btAgregar" border="0" />
+		</a>
+	</div>
+{/if}
+{if $SCRIPT_PDF != ''}
+	<div class="item-paginador">
+		<a href="{$SCRIPT_PDF}" target="_blank">
+			<img src="templates/img/btn_pdf.gif" alt="Generar archivo PDF" title="Generar archivo PDF" name="btPDF" border="0" />
+		</a>
+	</div>
+{/if}
+	<div class="item-paginador">
+		<a href="{$SCRIPT_PRI}">
+			<img src="templates/img/btn-primero.png" alt="Primera p&aacute;ina" name="btPrimero" border="0" title="Ir a la primer p&aacute;gina" />
+		</a>
+	</div>
+	<div class="item-paginador">
+		<a href="{$SCRIPT_ANT}">
+			<img src="templates/img/btn-anterior.png" alt="P&aacute;gina anterior" title="Ir a la p&aacute;gina anterior" name="btAnterior" border="0" />
+		</a>
+	</div><!--
+	<div class="item-select">
+		<select name="CBPAGINA" onchange="document.frmGRID.submit();" class="sel-nropag">
+		{html_options values=$CBPAGINA_ID selected=$PAGACT output=$CBPAGINA_ID}
+		</select>
+	</div>-->
+	<div class="item-paginador">
+		<a href="{$SCRIPT_SIG}">
+			<img src="templates/img/btn-siguiente.png" title="Ir a la p&aacute;gina siguiente" alt="P&aacute;gina siguiente" name="btSiguiente" border="0" />
+		</a>
+	</div>
+	<div class="item-paginador">
+		<a href="{$SCRIPT_ULT}">
+			<img src="templates/img/btn-ultimo.png" title="Ir a la &uacute;ltima p&aacute;gina" alt="Ultima p&aacute;gina" name="btUltimo" border="0" />
+		</a>
+	</div>
+</div>

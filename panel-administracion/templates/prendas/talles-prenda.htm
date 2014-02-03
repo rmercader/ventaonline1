@@ -1,0 +1,71 @@
+﻿{literal}
+<style>
+	#container { 
+		width: 400px; 
+	}
+</style>
+<script language="javascript" src="templates/src/helper-prendas.js"></script>
+<script>
+
+	$(document).ready(function(){
+		
+		$("#btGrabar").click(function(){
+			var errores = "";
+			
+			if(errores == ""){
+				document.forms["frmTalles"].submit();
+			}
+			else{
+				alert(errores);
+			}
+		});
+	});
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmTalles">	
+	{$NAVEGADOR}
+	<div class="button">
+		<img src="templates/img/ico-btn-editar.gif" alt="Editar detalles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=prendas&COD={$id_prenda}&ACC=M" />
+		<b>Editar detalles</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=fotos-prenda&COD={$id_prenda}" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-colores.gif" alt="Administrar colores" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=colores-prenda&COD={$id_prenda}" />
+		<b>Administrar colores</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-stock.png" alt="Administrar stock" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=stock-prenda&COD={$id_prenda}" />
+		<b>Administrar stock</b>
+	</div>
+	<div class="clear" />
+	<br>
+	<div class="celda-campo" style="text-decoration: underline;">
+		<div class="tit-campo">Lista de talles disponibles</div>
+	</div>
+	<div class="clear" style="height: 20px;"></div>
+	<div class="clear">
+		<div id="container">
+			{section name=linea loop=$REG}
+			<label class="tit-campo" style="padding-left: 20px;">{$REG[linea].codigo}
+				<input type="checkbox" name="talle_{$REG[linea].id_talle}" id="talle_{$REG[linea].id_talle}" {$REG[linea].marcado} />
+			</label>
+			{/section}
+			<div class="clear"></div>
+		</div>
+	</div>
+	<input type="hidden" name="error" value="{$error}" id="error">
+	<input type="hidden" name="id_prenda" id="id_prenda" value="{$id_prenda}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("error").value != "")
+		alert(document.getElementById("error").value);
+</script>
+{/literal}

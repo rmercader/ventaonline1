@@ -1,0 +1,135 @@
+﻿{literal}
+<style>
+	#container { 
+		width: 920px; 
+	}
+	DIV.list_item_container {
+		height: 20px;
+		padding: 5px;
+	}
+	DIV.label {
+		padding-left: 5px;
+		text-transform: uppercase;
+		padding-left: 35px;
+	}
+</style>
+<script>
+	
+	function cambiaCriterio(criterio){
+		var divBoton = document.getElementById("btAsociar");
+		var divTitulo = document.getElementById("tit_opcion");
+		var idColeccion = $("#id_coleccion").attr("value");
+		var opcAsociacion = $("#opc_asociacion").attr("value");
+		
+		document.getElementById("nombre").value = '';
+		switch(criterio){
+			case "categoria":
+				divBoton.innerHTML = '<b>Asociar categoría</b>';
+				divTitulo.innerHTML = 'Escribir el nombre de la categoría';
+			    break;
+
+			case "prenda":
+			    divBoton.innerHTML = '<b>Asociar prenda</b>';
+				divTitulo.innerHTML = 'Escribir el nombre de la prenda';
+			    break;
+		}
+		$("#nombre").autocomplete("option", "source", 'prendas/prendas-coleccion-ajax.php?id_coleccion='+idColeccion+'&asociar='+opcAsociacion);
+	}
+	
+	function eliminar(){
+		var arrMarcados = new Array();
+		$("input[type='checkbox']").each(function() {
+			if($(this).attr("checked")){
+				arrMarcados.push($(this).attr("id").substr(4));
+			}
+		});
+		if(arrMarcados.length > 0){
+			if(confirm("¿Está seguro de eliminar de la colección las prendas seleccionadas?")){
+				document.getElementById("container").innerHTML = "<img src=\"templates/img/spinner.gif\" />";					
+				xajax_eliminarAsociacionPrendas($("#id_coleccion").attr("value"), arrMarcados.join());
+			}
+		}
+		else{
+			alert("Seleccione uno o más elementos para eliminar.\n");
+		}
+	}
+	
+	$(document).ready(function(){
+		
+		$("#btAsociar").click(function(){
+			var errores = "";
+			var idCuestion = document.getElementById("id_cuestion").value * 1;
+			if(isNaN(idCuestion) || idCuestion <= 0){
+				errores += "Ingrese un elemento para asociar.\n";
+			}
+			
+			if(errores == ""){
+				document.forms["frmPrendas"].submit();
+			}
+			else{
+				alert(errores);
+			}
+		});
+		
+		var idColeccion = $("#id_coleccion").attr("value");
+		var opcAsociacion = $("#opc_asociacion").attr("value");
+		
+		$("#nombre").autocomplete({
+			source: 'prendas/prendas-coleccion-ajax.php?id_coleccion='+idColeccion+'&asociar='+opcAsociacion,
+			autoFocus: true,
+			delay: 300,
+			minLength: 3,
+			select: function(event, ui){
+				var valorPuesto = ui.item.value.split(' - ');
+				$("#id_cuestion").attr("value", valorPuesto[0]);
+			},
+			focus: function(event, ui){
+
+			}
+		});
+	});
+</script>
+<script language="javascript" src="templates/src/helper-prendas.js"></script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmPrendas">	
+	{$NAVEGADOR}
+	<div class="button">
+		<img src="templates/img/ico-btn-editar.gif" alt="Editar detalles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=colecciones&COD={$id_coleccion}&ACC=M" />
+		<b>Editar detalles</b>
+	</div>
+	<div class="clear" />
+	<br>
+	<div class="celda-campo">
+		<div class="tit-campo">Seleccionar opción de asociación</div>
+		<select id="opc_asociacion" name="opc_asociacion" onchange="cambiaCriterio(this.value);">
+		    {html_options values=$OPC_IDS selected=$OPC_VAL output=$OPC_DSC}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo" id="tit_opcion">Escribir el nombre de la prenda</div>
+		<input type="text" name="nombre" id="nombre" size="30" />
+		<div id="resultados"></div>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<div class="button" style="position: relative; bottom: 4px;" id="btAsociar"><b>Asociar prenda</b></div>
+	</div>
+	<div class="clear" style="height: 20px;"></div>
+	<div class="clear">
+		<div id="container">
+			{$PRENDAS}
+			<div class="clear"></div>
+		</div>
+	</div>
+    <input type="hidden" name="orden" id="orden" />
+	<input type="hidden" name="error" value="{$error}" id="error">
+	<input type="hidden" name="id_coleccion" id="id_coleccion" value="{$id_coleccion}">
+	<input type="hidden" name="id_cuestion" id="id_cuestion">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("error").value != "")
+		alert(document.getElementById("error").value);
+</script>
+{/literal}

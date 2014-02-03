@@ -1,0 +1,51 @@
+<div id="buscador">
+	<div class="celda-campo">
+		<div class="tit-criterio">Orden N°</div>
+		<input type="text" name="id_venta" id="id_venta" value="{$id_venta}" size="6" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Fecha Desde</div>
+		{html_select_date prefix="fecha_desde" field_order=DMY time=$fecha_desde start_year="-5"}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Fecha Hasta</div>
+		{html_select_date prefix="fecha_hasta" field_order=DMY time=$fecha_hasta start_year="-5"}
+	</div>
+	<div class="celda-campo" style="clear: both;">
+		<div class="tit-criterio">Estado pago</div>
+		<select name="estado_pago" id="estado_pago">
+			<option value=""></option>
+			{html_options values=$ids_estados_pago selected=$estado_pago output=$dsc_estados_pago}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Estado</div>
+		<select name="estado" id="estado">
+			<option value=""></option>
+			{html_options values=$ids_estados selected=$estado output=$dsc_estados}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Medio pago</div>
+		<select name="medio_pago" id="medio_pago">
+			<option value=""></option>
+			{html_options values=$ids_medios selected=$medio_pago output=$dsc_medios}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Ordenado por</div>
+		<select name="ORDEN_CAMPO" id="ORDEN_CAMPO">
+			{html_options values=$value_orden_campo selected=$ORDEN_CAMPO output=$dsc_orden_campo}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">En orden</div>
+		<select name="ORDEN" id="ORDEN">
+			{html_options values=$value_orden selected=$ORDEN output=$dsc_orden}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<input name="btOK" type="image" id="btOK" src="templates/img/btn-buscar.png" title="Iniciar b&uacute;squeda" vspace="10" class="nada">
+	</div>
+</div>
+

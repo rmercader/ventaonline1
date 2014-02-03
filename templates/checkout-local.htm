@@ -1,0 +1,306 @@
+<!doctype html>  
+	<head>
+	<meta charset="UTF-8" />
+	<title>PRILI - Checkout</title>
+	<link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+	<link rel="stylesheet" type="text/css" href="css/ultimo2.css"/>
+	<link rel="stylesheet" type="text/css" href="css/internos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/messages.css"/>
+	<link rel="stylesheet" type="text/css" href="css/tinyboxstyle.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="css/FoxyCart - Styles.css"/>-->
+	<!--start script cufon-->
+	<script type="text/javascript" src='js/cufon-yui.js'></script>
+	<script type='text/javascript' src='js/Trajan_Pro_400-Trajan_Pro_700.font.js'></script>
+	<script type="text/javascript">
+		Cufon.replace('h3,.prominent,.prominent2,nav,.submenu-fuente', {
+			hover: true
+		});
+	</script>
+	<!-- end script cufon-->
+	<!-- BEGIN FOXYCART FILES -->
+	<link rel="stylesheet" href="//cdn.foxycart.com/static/scripts/colorbox/1.3.18/style1_fc/colorbox.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.foxycart.com/prili/foxycart.colorbox.js" type="text/javascript" charset="utf-8"></script>
+	<!-- END FOXYCART FILES -->
+	<script src="js/tooltip-script.js" language="javascript" type="text/javascript"></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/keypress_validation.js'></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/funcion.js'></script>
+	<script type="text/javascript" src='js/messages.js'></script>
+	<script type="text/javascript" src='js/tinybox.js'></script>
+	<script type="text/javascript" src="js/manejo-venta.js"></script>
+	<!-- QUITAR
+	<script src="js/jquery-1.7.1.min.js" language="javascript" type="text/javascript"></script> -->
+	{$AJAX_JAVASCRIPT}
+	</head>
+<body>
+<script type="text/javascript">
+	// La tipografia
+	Cufon.replace('.paso-checkout', {
+		hover: true
+	});
+	// Obtengo los contenidos del carrito
+	obtenerContenidoBolsaCompras();
+</script>
+<form method="POST" action="" name="frmCheckout" id="frmCheckout" enctype="multipart/form-data">
+<div class="abajo_internas">
+	<div class="abajo_interna">
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="checkout">
+				<h3>Compra local</h3> 
+				<div class="texto_internas" style="float: top; width: 100%;">
+					<div id="fc_cancel_continue_shopping">
+						<a href="javascript:history.go(-1)">Cancelar y continuar comprando</a>
+					</div>
+					<table border=0 width="700">
+  						<tr>
+    						<td width="350" valign="top">
+					<div class="checkout-block" style="width: 300px;" id="divCuenta">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso1.png" />
+						</div>
+						<div>
+							<label for="email">Email*</label>
+							<input name="email" id="email" type="text" value="{$email}" autocomplete="off" onpaste="return false;" />
+						</div>
+						<div>
+							<ul>
+								<li id="errEmail" class="checkout-error">Por favor ingrese su email.</li>
+								<li id="errEmailInvalido" class="checkout-error">Por favor ingrese una dirección de email válida.</li>
+							</ul>
+						</div>
+						<div style="clear:both;"> 
+							<p class="checkout-message" id="checkout_msg">Por favor ingrese su email</p>
+						</div>
+						<span style="display:none" id="login_ajax"><img alt="Cargando..." src="imagenes/ajax-loader.gif"></span>
+						<ol style="padding-left: 80px; padding-top:10px">
+							<li id="liInvitado" style="display:none">
+								<input type="radio" id="is_anonymous_1" value="1" name="is_anonymous">
+								<span>Comprar sin registrarse</span>
+							</li>
+							<li style="padding-top:10px">
+								<input type="radio" checked="checked" class="fc_radio" id="is_anonymous_0" value="0" name="is_anonymous">
+								<span id="spnCrearUsarCuenta">Crear o Usar una Cuenta</span>
+							</li>
+						</ol>
+						<div id="divClave" style="display: none; padding-top: 10px;">
+							<label for="clave">Contraseña*</label>
+							<input name="clave" id="clave" type="password" value="{$clave}" />
+						</div>
+						<div>
+							<ul>
+								<li id="errClave" class="checkout-error">Por favor ingrese su contraseña.</li>
+							</ul>
+						</div>
+						<div id="divClaveConf" style="display: none; padding-top: 10px;">
+							<label for="clave">Reingrese Contraseña*</label>
+							<input name="clave_conf" id="clave_conf" type="password" value="{$clave_conf}" />
+						</div>
+						<div>
+							<ul>
+								<li id="errClaveConf" class="checkout-error">La contraseña y su confirmación no coinciden.</li>
+							</ul>
+						</div>
+						<div id="btn-continuar" style="float: right; padding-top: 10px; display: none; cursor: pointer;">
+							<img src="imagenes/bot-continuargris.png" />
+						</div>
+					</div>
+    						</td>
+    						<td width="350" valign="top">
+    				<div class="checkout-block" id="divMediosPago" style="display: none;">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso3.png" />
+						</div>
+						<table cellpadding="0" border="0" class="tabla-medios-pago" width="440">
+							<tr>
+								<td width="135px" align="right" height="44px" class="td-logo">
+									<img src="imagenes/logo-abitab.png" alt="ABITAB" />
+								</td>
+								<td width="305px" height="44px">
+									<input type="radio" checked="checked" id="medio_pago_abitab" value="0" name="medio_pago" class="medio-pago" />
+									<div class="medio-pago-txt">
+										<strong>Abitab</strong>
+									</div>
+								</td>
+							</tr>
+							<tr style="display: {$displayOca};">
+								<td width="135px" align="right" height="44px" class="td-logo">
+									<img src="imagenes/logo-oca.png" alt="OCA CARD" />
+								</td>
+								<td width="305px" height="44px">
+									<input type="radio" id="medio_pago_oca" value="1" name="medio_pago" class="medio-pago" />
+									<div class="medio-pago-txt">
+										<strong>Oca Card</strong> - Pago Online
+									</div>
+								</td>
+							</tr>
+						</table>
+						<table cellpadding="0" border="0" class="tabla-medios-pago" width="440" id="info_oca" style="display: none; margin-top: 0px;">
+							<tr>
+								<td width="135px" align="right" height="44px" class="td-logo" style="vertical-align: top; padding-top: 5px;">
+									<img src="imagenes/logo-oca-card.png" alt="OCA CARD" />
+								</td>
+								<td width="305px">
+									<span>Selecciona cantidad de cuotas:
+										<select name="cuotas_oca" id="cuotas_oca">
+											{html_options values=$cuotas_oca_vals selected=$cuotas_oca output=$cuotas_oca_vals}
+										</select>
+									</span>
+									<br />
+									<div style="font-size: 10px; padding: 3px 3px 3px 0;">
+									Serás redirigido a los servidores de Oca,
+									ningún dato de la tarjeta se guarda en nuestros
+									servidores, lo que hace los pagos 100% seguros.</div>
+								</td>
+							</tr>
+						</table>
+						<!-- <ol class="customer-add">
+							<li>
+								<img src="imagenes/logo-abitab.png" style="padding-right: 10px" />
+								<input type="radio" checked="checked" id="medio_pago_abitab" value="0" name="medio_pago">
+								<span>Abitab</span>
+							</li>
+						</ol> -->
+						<ol class="customer-add">
+								<li class="customer-add-row" style="padding-top: 20px;">
+									<label for="cupon">Usar cupón de descuento</label>
+									<input name="cupon" id="cupon" type="text"/>
+								</li>
+								<li class="checkout-info" id="aceptCupon">El código fue aceptado.</li>
+								<input name="errCupon" id="errCupon" type="text" class="checkout-error" readonly="readonly" />
+							</ol>
+					</div>
+							</td>
+    					</tr>
+					<!-- <div class="checkout-block" style="width: 50%; display: none;" id="divDetalles">
+						Cargando detalles de la compra...<br />
+						<img src="imagenes/ajax-loader.gif" />
+					</div> -->
+					<!-- <div class="checkout-block" style="width: 40%;" id="divCupon">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso3.png" />
+						</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label for="cupon">Usar cupón de descuento</label>
+									<input name="cupon" id="cupon" type="text" class="corto"/>
+								</li>
+								<li class="checkout-error" id="errCupon2">El cupón ingresado es inválido: verifique que esté correctamente ingresado.</li>
+								<input name="errCupon" id="errCupon" type="text" class="checkout-error" readonly="readonly" />
+							</ol>
+						</div>
+					</div> -->
+						<tr>
+							<td width="350" valign="top">    											
+					<div class="checkout-block" style="width: 300px;" id="divDatos">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso2.png" />
+						</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row" id="liMailConf">
+									<label for="emailconf">Confirme email*</label>
+									<input name="emailconf" id="emailconf" value="{$emailconf}" type="text" autocomplete="off" onpaste="return false;" />
+								</li>
+								<li class="checkout-error" id="errEmailConf">El email y su confirmación no coinciden.</li>
+								
+								<li class="customer-add-row">
+									<label for="nombre">Nombre*</label>
+									<input name="nombre" id="nombre" type="text" value="{$nombre}" />	
+								</li>
+								<li class="checkout-error" id="errNombre">Por favor ingrese su nombre.</li>
+								
+								<li class="customer-add-row">
+									<label for="apellido">Apellido*</label>
+									<input name="apellido" id="apellido" type="text" value="{$apellido}" />
+								</li>
+								<li class="checkout-error" id="errApellido">Por favor ingrese su apellido.</li>
+								
+								<li class="customer-add-row">
+									<label for="direccion">Dirección*</label>
+									<input name="direccion" id="direccion" type="text" value="{$direccion}" />
+								</li>
+								<li class="checkout-error" id="errDireccion">Por favor ingrese su dirección.</li>
+																
+								<li class="customer-add-row">
+									<label for="id_departamento">Departamento*</label>
+									<select name="id_departamento" class="text_input_azules_02" id="id_departamento" disabled="disabled">
+										{html_options values=$departamento_id selected=$id_departamento output=$departamento_dsc}
+									</select>
+								</li>
+								<li class="checkout-error" id="errDepartamento">Por favor ingrese su departamento.</li>
+								
+								<li class="customer-add-row">
+									<label for="ciudad">Ciudad*</label>
+									<input name="ciudad" id="ciudad" type="text" value="{$ciudad}" />
+								</li>
+								<li class="checkout-error" id="errCiudad">Por favor ingrese su ciudad.</li>
+								
+								<li class="customer-add-row">
+									<label for="codigo_postal">Código postal*</label>
+									<input name="codigo_postal" id="codigo_postal" type="text" value="{$codigo_postal}" />
+								</li>
+								<li class="checkout-error" id="errCP">Por favor ingrese su código postal.</li>
+								
+								<li class="customer-add-row">
+									<label for="telefono">Teléfono*</label>
+									<input name="telefono" id="telefono" type="text" value="{$telefono}" />
+								</li>
+								<li class="checkout-error" id="errTelefono">Por favor ingrese su teléfono.</li>
+							</ol>
+						</div>
+					</div>
+    						</td>
+							<td width="350" valign="top">												
+					<div class="checkout-blockPaso4" style="display: none;" id="divSubtotales">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso4.png" />
+						</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label for="subtotal">Subtotal de la compra</label>
+									<input name="subtotal" id="subtotal" type="text" class="corto" readonly="readonly" />
+								</li>
+								<li class="customer-add-row">
+									<label for="envio">Envío & Manejo</label>
+									<input name="envio" id="envio" value="{$envio}" type="text" class="corto" readonly="readonly" />
+								</li>
+								<li class="customer-add-row">
+									<label for="descuento">Descuento</label>
+									<input name="descuento" id="descuento" type="text" class="corto" readonly="readonly" />
+								</li>
+								<li class="customer-add-row">
+									<label for="total">Total de la orden</label>
+									<input name="total" id="total" type="text" class="corto" readonly="readonly" />
+								</li>
+							</ol>
+						</div>
+						<div class="checkout-blockPaso4" style="width: 100%; display: none;" id="divDetalles">
+							Cargando detalles de la compra...<br />
+							<img src="imagenes/ajax-loader.gif" />
+						</div>
+					</div>
+							</td>
+						</tr>
+					</table>
+					<div class="checkout-confirm" id="btn-confirm">
+						<img src="imagenes/btn-confirm-compra.png" />
+					</div>
+				</div>
+			</aside>
+		</div>
+		<!--end holder-->
+	</div>
+</div>
+<input type="hidden" value="{$errores}" id="errores" name="errores" />
+<input type="hidden" value="{$exitos}" id="exitos" name="exitos" />
+<input type="hidden" value="{$id_comprador}" id="id_comprador" name="id_comprador" />
+</form>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>  
+	<head>
+	<meta charset="UTF-8" />
+	<title>PRILI - Actualización de datos de la cuenta</title>
+	<link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+	<link rel="stylesheet" type="text/css" href="css/ultimo2.css"/>
+	<link rel="stylesheet" type="text/css" href="css/internos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/messages.css"/>
+	<link rel="stylesheet" type="text/css" href="css/tinyboxstyle.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="css/FoxyCart - Styles.css"/>-->
+	<!--start script cufon-->
+	<script type="text/javascript" src='js/cufon-yui.js'></script>
+	<script type='text/javascript' src='js/Trajan_Pro_400-Trajan_Pro_700.font.js'></script>
+	<script type="text/javascript">
+		Cufon.replace('h3,.prominent,.prominent2,nav,.submenu-fuente', {
+			hover: true
+		});
+	</script>
+	<!-- end script cufon-->
+	<!-- BEGIN FOXYCART FILES -->
+	<link rel="stylesheet" href="//cdn.foxycart.com/static/scripts/colorbox/1.3.18/style1_fc/colorbox.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.foxycart.com/prili/foxycart.colorbox.js" type="text/javascript" charset="utf-8"></script>
+	<!-- END FOXYCART FILES -->
+	<script src="js/tooltip-script.js" language="javascript" type="text/javascript"></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/keypress_validation.js'></script>
+	<script type="text/javascript" src='panel-administracion/templates/src/funcion.js'></script>
+	<script type="text/javascript" src='js/messages.js'></script>
+	<script type="text/javascript" src='js/tinybox.js'></script>
+	<script type="text/javascript" src="js/manejo-usuario.js"></script>
+	<!-- QUITAR
+	<script src="js/jquery-1.7.1.min.js" language="javascript" type="text/javascript"></script> -->
+	{$AJAX_JAVASCRIPT}
+	</head>
+<body>
+<script type="text/javascript">
+	// La tipografia
+	Cufon.replace('.paso-checkout', {
+		hover: true
+	});
+</script>
+<form method="POST" action="" name="frmDatos" id="frmDatos" enctype="multipart/form-data">
+<div class="abajo_internas">
+	<div class="abajo_interna">
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="checkout">
+				<h3>mi cuenta</h3> 
+				<div class="texto_internas" style="float: left; width: 100%;">
+					<div id="fc_cancel_continue_shopping">
+						<a href="index.php">Cancelar y continuar comprando</a>
+					</div>
+					<div class="checkout-block" style="width: 500px;" id="divCuenta">
+						<div class="checkout-paso">
+							<img src="imagenes/bot-paso1.png" />
+						</div>
+						<div>
+							<label for="email">Email*</label>
+							<input name="email" id="email" type="text" value="{$email}" autocomplete="off" onpaste="return false;" />
+							<img src="imagenes/bot-continuargris.png" id="continuarMail" style="cursor: pointer; float: right;" />
+						</div>
+						<div>
+							<ul>
+								<li id="errEmail" class="checkout-error">Por favor ingrese su email.</li>
+								<li id="errEmailInvalido" class="checkout-error">Por favor ingrese una dirección de email válida.</li>
+							</ul>
+						</div>
+						<div style="clear:both;">
+							<p class="checkout-message" id="checkout_msg">Por favor ingrese su email</p>
+						</div>
+						<span style="display:none" id="login_ajax"><img alt="Cargando..." src="imagenes/ajax-loader.gif"></span>
+						<div id="divClave" style="display: none; padding-top: 10px;">
+							<label for="clave">Contraseña*</label>
+							<input name="clave" id="clave" type="password" value="{$clave}" />
+						</div>
+						<div>
+							<ul>
+								<li id="errClave" class="checkout-error">Por favor ingrese su contraseña.</li>
+								<li id="olvidoClave" class="checkout-error" style="margin-top: 10px;">
+									<a href="javascript:enviarContrasena();" class="olvido-clave">Olvidé mi contraseña. Enviar a mi correo electronico una nueva.</a>
+								</li>
+								<li id="cambioClave" class="checkout-error" style="margin-top: 10px;">
+									<a href="javascript:abrirCambioContrasena();" class="olvido-clave">Cambiar mi contraseña.</a>
+								</li>
+							</ul>
+						</div>
+						<div id="btn-continuar" style="float: right; padding-top: 10px; display: none; cursor: pointer;">
+							<img src="imagenes/bot-continuargris.png" />
+						</div>
+					</div>
+					<div class="checkout-block" style="clear: both; width: 500px; display: none;" id="divDatos">
+						<div class="checkout-paso" style="padding-top: 50px;">
+							<img src="imagenes/bot-paso2.png" />
+						</div>
+						<div>
+							<ol class="customer-add">
+								<li class="customer-add-row">
+									<label for="nombre">Nombre*</label>
+									<input name="nombre" id="nombre" type="text" value="{$nombre}" />	
+								</li>
+								<li class="checkout-error" id="errNombre">Por favor ingrese su nombre.</li>
+								
+								<li class="customer-add-row">
+									<label for="apellido">Apellido*</label>
+									<input name="apellido" id="apellido" type="text" value="{$apellido}" />
+								</li>
+								<li class="checkout-error" id="errApellido">Por favor ingrese su apellido.</li>
+								
+								<li class="customer-add-row">
+									<label for="direccion">Dirección*</label>
+									<input name="direccion" id="direccion" type="text" value="{$direccion}" />
+								</li>
+								<li class="checkout-error" id="errDireccion">Por favor ingrese su dirección.</li>
+																
+								<li class="customer-add-row">
+									<label for="id_departamento">Departamento*</label>
+									<select name="id_departamento" class="text_input_azules_02" id="id_departamento">
+										{html_options values=$departamento_id selected=$id_departamento output=$departamento_dsc}
+									</select>
+								</li>
+								<li class="checkout-error" id="errDepartamento">Por favor ingrese su departamento.</li>
+								
+								<li class="customer-add-row">
+									<label for="ciudad">Ciudad*</label>
+									<input name="ciudad" id="ciudad" type="text" value="{$ciudad}" />
+								</li>
+								<li class="checkout-error" id="errCiudad">Por favor ingrese su ciudad.</li>
+								
+								<li class="customer-add-row">
+									<label for="codigo_postal">Código postal*</label>
+									<input name="codigo_postal" id="codigo_postal" type="text" value="{$codigo_postal}" />
+								</li>
+								<li class="checkout-error" id="errCP">Por favor ingrese su código postal.</li>
+								
+								<li class="customer-add-row">
+									<label for="telefono">Teléfono*</label>
+									<input name="telefono" id="telefono" type="text" value="{$telefono}" />
+								</li>
+								<li class="checkout-error" id="errTelefono">Por favor ingrese su teléfono.</li>
+							</ol>
+						</div>
+					</div>
+					<div class="checkout-confirm" id="btn-confirm" style="display: none;">
+						<img src="imagenes/bot-continuargris.png" alt="Actualizar" title="Actualizar datos" />
+					</div>
+				</div>
+			</aside>
+		</div>
+		<!--end holder-->
+	</div>
+</div>
+<input type="hidden" value="{$errores}" id="errores" name="errores" />
+<input type="hidden" value="{$exitos}" id="exitos" name="exitos" />
+<input type="hidden" value="{$id_comprador}" id="id_comprador" name="id_comprador" />
+</form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="abajo" style="background-image:url({$imgFondo});">
+	<div class="adentro_abajo">
+		<!--start holder-->
+		<div class="holder_content">
+			<aside class="group1" style="height: 700px;">
+				<h3>Prendas destacadas de la semana</h3> 
+				{foreach $lstDestacadas as $prendaDest}
+				<article class="holder_news">
+					<div id="destacada">
+						<a href="prenda-detalle.php?prenda={$prendaDest.id_prenda}">
+							<img src="{$prendaDest.url_preview}" width="{$LARGO_PREVIEW_PRENDA}" height="{$ANCHO_PREVIEW_PRENDA}" alt="" />
+						</a>
+					</div>
+					<p>{$prendaDest.nombre_prenda}</p>
+					<div id="price">${$prendaDest.precio} </div>
+					<span class="comprar"><a href="prenda-detalle.php?prenda={$prendaDest.id_prenda}">Comprar</a></span>
+				</article>
+				{/foreach}
+			</aside>
+			<!-- start menu lat izq -->
+			
+			<!-- end menu lat izq -->
+		</div>
+		<!--end holder-->
+	</div>
+</div>
