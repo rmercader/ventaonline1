@@ -1,0 +1,1 @@
+Otorgar permisos de escritura para el usuario del web server a esta carpeta.
