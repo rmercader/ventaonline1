@@ -89,9 +89,9 @@
 			<br />
 			<img height="53px" src="http://www.prili.net/images/logo.png"><br /><br />
 			<b>PRILI S.A.</b><br />
-			<i>{$mensaje}:</i><br /><hr>
-			<br />
-			<b>Detalle de la compra:</b><br /><br />
+			{$mensaje}
+			La misma ha sido confirmada por:
+			<br /><hr><br />
 			Fecha de compra: <b>{$fecha}</b> <br />	
 			Nombre: <b>{$nombre} {$apellido}</b> <br />
 			Email: <b>{$email}</b> <br />
@@ -109,12 +109,24 @@
 			Estado de la compra: <b>{$estadoVenta}</b> <br />
 			Subtotal: <b>{$subtotal}</b> <br />
 			Costo de envío: <b>{$costo_envio}</b> <br />
-			Descuento: <b>{$descuento}</b> <br />
-			Total: <b>{$total}</b> <br />
+			Descuento: <b>{$descuento}</b> <br /><br />
+			Monto Total: <b>{$total}</b> <br />
 			<br />
 			{if $talonAbitab == ''}
-			Esta es tu ORDEN DE COMPRA.<br />
-			Importante: las prendas las recibirás dentro de los próximos 4 días hábiles.<br />
+				Esta es tu ORDEN DE COMPRA.<br />
+				Importante: las prendas las recibirás dentro de los próximos 4 días hábiles.<br />
+			{else}
+				<b>PARA REALIZAR EL PAGO DE LA MISMA:</b><br />
+				<ol>
+					<li>Concurrir a cualquier local de Abitab del país.</li>
+					<li>Mencionar pago por Abitab Net a nombre de Prili s.a. con el Nro.000593.</li>
+					<li>Abonar el monto total de tu compra.</li>
+				</ol>
+				<br />
+				<b>IMPORTANTE:</b><br />
+				Plazo de pago: 10 días.<br />
+				Pasado este plazo, queda sin efecto la misma.<br />
+				Las prendas las recibirás dentro de los próximos 4 días hábiles.<br />
 			{/if}
 			Si tuviste algún inconveniente con la Compra y/o la entrega, comunicate con nosotros via mail a <a href="mailto:ventasonline@prili.net">ventasonline@prili.net</a> o a los teléfonos (598+2) 203 61 68 / 209 90 89.<br />
 			{if $urlAnulacion != ''}
@@ -122,9 +134,6 @@
 			Para cancelar su compra, siga este link: 
 			<br />
 			<a href="{$urlAnulacion}" target="blank">{$urlAnulacion}</a>
-			{/if}
-			{if $talonAbitab != ''}
-				{$talonAbitab}
 			{/if}
 		</font>
 	</div>
