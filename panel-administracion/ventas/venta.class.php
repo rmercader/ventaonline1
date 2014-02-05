@@ -303,6 +303,11 @@ class Venta extends Table {
 		$arrEstados = array('iniciada', 'enviada', 'completa');
 		$Form->assign('ids_estados', $arrEstados);
 		$Form->assign('dsc_estados', array_map('strtoupper', $arrEstados));
+
+		// Combo estados del pago
+		$arrEstadosPago = array('pendiente', 'confirmado');
+		$Form->assign('ids_estados_pago', $arrEstadosPago);
+		$Form->assign('dsc_estados_pago', array_map('strtoupper', $arrEstadosPago));
 		
 		// Comprador invitado o registrado?
 		if($this->Registro['invitado']){
@@ -350,6 +355,7 @@ class Venta extends Table {
 		
 		$this->Ajax->setRequestURI(DIR_HTTP.'ventas/ajax-ventas.php');
 		$this->Ajax->registerFunction("modificarEstado");
+		$this->Ajax->registerFunction("modificarEstadoPago");
 	
 		// Contenido
 		return($Form->fetchHTML());
@@ -550,6 +556,15 @@ class Venta extends Table {
 	
 	function modificarEstado($idVenta, $estado){
 		$sql = "UPDATE venta SET estado = '$estado' WHERE id_venta = $idVenta";
+		$ok = $this->DB->execute($sql);
+		if($ok === false){
+			return "{$this->DB->ErrorMsg()}\nSQL: $sql";
+		}
+		return "";
+	}
+
+	function modificarEstadoPago($idVenta, $estado){
+		$sql = "UPDATE venta SET estado_pago = '$estado' WHERE id_venta = $idVenta";
 		$ok = $this->DB->execute($sql);
 		if($ok === false){
 			return "{$this->DB->ErrorMsg()}\nSQL: $sql";

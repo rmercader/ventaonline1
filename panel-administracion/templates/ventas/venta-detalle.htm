@@ -1,9 +1,17 @@
 <script type="text/javascript">
+	
 	function cambiarEstado(){
 		var idVenta = $("#id_venta").val(),
 			estado = $("#estado").val();
 		xajax_modificarEstado(idVenta, estado);
 	}
+
+	function cambiarEstadoPago(){
+		var idVenta = $("#id_venta").val(),
+			estado = $("#estado_pago").val();
+		xajax_modificarEstadoPago(idVenta, estado);
+	}
+
 </script>
 <form action="" method="POST" enctype="multipart/form-data" name="frmVenta" onsubmit="before_submit(); return false;">	
 	{$NAVEGADOR}
@@ -21,7 +29,14 @@
 	</div>
 	<div class="celda-campo">
 		<div class="tit-campo">Estado del pago</div>
-		<input type="text" name="estado_pago" id="estado_pago" size="15" value="{$estado_pago|upper}" {$SOLO_LECTURA}>
+		<select name="estado_pago" id="estado_pago">
+			{html_options values=$ids_estados_pago selected=$estado_pago output=$dsc_estados_pago}
+		</select>
+	</div>
+	<div class="celda-campo" style="padding-top: 10px;">
+		<a href="javascript:cambiarEstadoPago();">
+			<img src="templates/img/actualizar.png" alt="Actualizar" border="0" title="Actualizar estado del pago" />
+		</a>
 	</div>
 	<div class="celda-campo">
 		<div class="tit-campo">Estado de la venta</div>
@@ -31,7 +46,7 @@
 	</div>
 	<div class="celda-campo" style="padding-top: 10px;">
 		<a href="javascript:cambiarEstado();">
-			<img src="templates/img/actualizar.png" alt="Actualizar" border="0" title="Actualizar estado" />
+			<img src="templates/img/actualizar.png" alt="Actualizar" border="0" title="Actualizar estado de la venta" />
 		</a>
 	</div>
 	<div class="clear"></div>
