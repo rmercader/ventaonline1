@@ -407,7 +407,6 @@ class Interfaz {
 						// Destinatario 
 						$mailComprador->AddAddress($datosComprador['email']);
 						$mailComprador->AddBCC("mcaravia@narthex.com.uy");
-						$mailComprador->AddBCC("rodrigomercader@gmail.com"); // Quitar!!!
 						$mailComprador->Body = utf8_decode($mailComprador->WrapText($contComprador, 72));
 						LogArchivo(utf8_decode($mailComprador->WrapText($contComprador, 72)));
 						$success = $mailComprador->Send();
