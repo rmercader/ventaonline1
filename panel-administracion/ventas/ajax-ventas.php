@@ -29,15 +29,39 @@ function modificarEstado($id, $estadoVal){
 		$vta = new Venta($Cnx, $xajax);
 		$res = $vta->modificarEstado($idVenta, $estado);
 		if($res == ""){ 
-			$objResponse->alert("El estado se ha modificado correctamente");
+			$objResponse->alert("El estado de la venta se ha modificado correctamente");
 		}
 		else {
-			$objResponse->alert("El estado no se ha podido modificar debido a un error interno.");
+			$objResponse->alert("El estado de la venta no se ha podido modificar debido a un error interno.");
 			LogArchivo($res);
 		}
 	}
 	else {
-		$objResponse->alert("El estado es incorrecto.");
+		$objResponse->alert("El estado de la venta es incorrecto.");
+	}
+	
+	return $objResponse;
+}
+
+function modificarEstadoPago($id, $estadoVal){
+	$objResponse = new xajaxResponse(); // Creo objeto Response
+	// Validaciones
+	$idVenta = (int)$id;
+	if(in_array($estadoVal, array('pendiente', 'confirmado'))){
+		$estado = $estadoVal;
+		$Cnx = nyiCNX(); // Creo la conexion
+		$vta = new Venta($Cnx, $xajax);
+		$res = $vta->modificarEstadoPago($idVenta, $estado);
+		if($res == ""){ 
+			$objResponse->alert("El estado del pago se ha modificado correctamente");
+		}
+		else {
+			$objResponse->alert("El estado del pago no se ha podido modificar debido a un error interno.");
+			LogArchivo($res);
+		}
+	}
+	else {
+		$objResponse->alert("El estado del pago es incorrecto.");
 	}
 	
 	return $objResponse;
@@ -45,6 +69,7 @@ function modificarEstado($id, $estadoVal){
 
 // Ajax
 $xajax->registerFunction("modificarEstado");
+$xajax->registerFunction("modificarEstadoPago");
 $xajax->processRequest();
 $xajax->printJavascript(DIR_XAJAX_PARA_ADMIN);
 

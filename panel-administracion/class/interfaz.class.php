@@ -329,7 +329,7 @@ class Interfaz {
 						$strInfoPago = "";
 						switch($infoExtra["medio_pago"]){
 							case MEDIO_PAGO_ABITAB:
-								$strInfoPago = "ABITAB";
+								$strInfoPago = "AbitabNET";
 								break;
 
 							case MEDIO_PAGO_OCA:
@@ -368,7 +368,7 @@ class Interfaz {
 						$htmlMail->assign("costo_envio", $costoDsc);
 						$htmlMail->assign("descuento", $descuentoDsc);
 						$htmlMail->assign("total",  $totalDsc);
-						$htmlMail->assign("mensaje", "Muchas gracias por tu compra.<br />Confirmamos que tu Orden de compra número: $idVenta ha sido registrada en nuestro sistema informático con los siguientes datos");
+						$htmlMail->assign("mensaje", "Estimado <b>{$datosComprador["nombre"]}</b><br />Muchas gracias por tu compra.<br />");
 						
 						// Datos del comprador
 						$htmlMail->assign('nombre', $datosComprador["nombre"]);
@@ -385,23 +385,9 @@ class Interfaz {
 						
 						// Talon ABITAB
 						if($infoExtra["medio_pago"] == MEDIO_PAGO_ABITAB){
-							$talonAbitab = new nyiHTML("ventas/talon-abitab.htm", DIR_HTML_ADMIN);
-							$talonAbitab->assign('codigoPrili', COD_CLIENTE_ABITAB);
-							$talonAbitab->assign('cliente', $idComprador);
-							$talonAbitab->assign('fechaEmision', date("d-m-Y"));
-							$talonAbitab->assign('documento', $idVenta);
-							$talonAbitab->assign('importe', $totalDsc);
-							$cod25 = $this->obtenerString25($idVenta); // String de 25
-							$cod24 = $this->obtenerString24($idVenta, $cod25); // String de 24 y digito de control
-							
-							// Ahora tengo que pasar al template las URLs para generar el codigo de barras
-							$talonAbitab->assign('urlBarra25', URL_GENERADOR_CODIGO_BARRAS . "?t=" . time() . "&codigo=$cod25");
-							$talonAbitab->assign('urlBarra24', URL_GENERADOR_CODIGO_BARRAS . "?t=" . time() . "&codigo=$cod24");
-							
-							$talonAbitab->assign('digitoControl', substr($cod24, 23, 1));
-							$contTalon = $talonAbitab->fetchHTML();
-							$htmlMail->assign("talonAbitab", $contTalon);
+							$htmlMail->assign("talonAbitab", _SI);
 						}
+
 						$contComprador = $htmlMail->fetchHTML();
 						
 						$htmlMail->assign("mensaje", "Se ha generado una nueva venta");
@@ -422,7 +408,7 @@ class Interfaz {
 						$mailComprador->AddAddress($datosComprador['email']);
 						$mailComprador->AddBCC("mcaravia@narthex.com.uy");
 						$mailComprador->Body = utf8_decode($mailComprador->WrapText($contComprador, 72));
-						//LogArchivo(utf8_decode($mailComprador->WrapText($contComprador, 72)));
+						LogArchivo(utf8_decode($mailComprador->WrapText($contComprador, 72)));
 						$success = $mailComprador->Send();
 						if($success === FALSE){
 							LogArchivo("No se pudo enviar mail al comprador por concepto de venta nro.: $idVenta.\nInfo del error: {$mailComprador->ErrorInfo}");	
