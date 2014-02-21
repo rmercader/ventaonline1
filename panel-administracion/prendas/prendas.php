@@ -32,6 +32,7 @@ switch ($Acc) {
 			exit();
 		}
 		break;
+		
 	case ACC_MODIFICACION:
    		if (isset($_GET['COD'])){
 			$mod_Contenido = $Tabla->Update($_GET['COD'], 'id_prenda');
@@ -42,6 +43,7 @@ switch ($Acc) {
 			}
 		}	
 		break;
+
 	case ACC_BAJA:
    		if (isset($_GET['COD'])){
 			$mod_Contenido = $Tabla->Delete($_GET['COD'], 'id_prenda');
@@ -52,17 +54,27 @@ switch ($Acc) {
 			}
    		}
 		break;
+
 	case ACC_CONSULTA:
 		// Si hay codigo
    		if (isset($_GET['COD']))
 			$mod_Contenido = $Tabla->consulta($_GET['COD']);
 		break;
+
 	case ACC_PDF:
 		$Tabla->PDF();
 		break;
+
 	case ACC_GRID:
 		$mod_Contenido = $Tabla->grid($Reg_Pag);
 		break;
+
+	case "R":
+		// Exportar a excel
+		header("Location: reporte-stock-excel.php");
+		exit();
+		break;
+
 	default:
 		$mod_Contenido = 'Error de parametros';
 		break;
