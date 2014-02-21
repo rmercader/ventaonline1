@@ -221,7 +221,7 @@ class Prenda extends Table {
 			"IF(p.visible, 'Si', 'No')"=>"Visible",
 			'p.precio'=>"Precio"
 		);
-		$Grid->setFrmCriterio('base_criterios_buscador.htm', $arrCriterios);
+		$Grid->setFrmCriterio('prendas/base-criterios-buscador-prendas.htm', $arrCriterios);
 	
 		// Si viene con post
 		if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -523,6 +523,13 @@ class Prenda extends Table {
 		//echo "<pre>$qSelect</pre>\n";
 		$res = $this->DB->execute($qSelect);
 		return array("datos"=>iterator_to_array($res), "cantidad"=>$totalrows);
+	}
+
+	function obtenerStockParaExcel(){
+		$sqlQuery = "SELECT * FROM reporte_stock";
+		$recordSet = $this->DB->execute($sqlQuery);
+
+		return iterator_to_array($recordSet);
 	}
 }
 ?>
