@@ -6,11 +6,10 @@ include(DIR_BASE.'configuracion-inicial.php');
 include(DIR_BASE.'prendas/prenda.class.php');
 require_once './excel/PHPExcel.php';
 
-/*
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);*/
-ini_set("memory_limit", "64M");
+ini_set('display_startup_errors', TRUE);
+ini_set("memory_limit", "128M");
 
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();
